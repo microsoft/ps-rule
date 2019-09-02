@@ -1,13 +1,10 @@
-name: 'Container Action Template'
-description: 'Get started with Container actions'
-author: 'GitHub'
+name: 'PSRule'
+description: 'Run rules in a GitHub repository.'
+author: 'Bernie White'
 inputs: 
-  myInput:
-    description: 'Input to use'
-    default: 'world'
+  source:
+    description: 'Rule source location.'
+    default: '.rule/'
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - "-Message"
-    - ${{ inputs.myInput }}
