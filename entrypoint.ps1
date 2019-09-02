@@ -3,8 +3,8 @@ $sourcePath = $Env:SOURCE;
 $workspacePath = $Env:GITHUB_WORKSPACE;
 
 Write-Host "> Preparing PSRule";
-Install-Module -Name PSRule -Force -Scope CurrentUser;
-Import-Module -Name /ps-rule/modules/PSRule;
+Write-Host "> Using source: $sourcePath";
+Write-Host "> Using workspace: $workspacePath";
 
 try {
     Invoke-PSRule -Path $sourcePath -InputPath $workspacePath -ErrorAction Stop;
