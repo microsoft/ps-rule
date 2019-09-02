@@ -14,7 +14,7 @@ To get started [create a workflow](https://help.github.com/en/articles/configuri
 
 To include PSRule actions:
 
-1. Reference the `BernieWhite/PSRule-actions@bewhite/dev` step.
+1. Reference `BernieWhite/PSRule-actions@bewhite/dev`.
 
 For example:
 
