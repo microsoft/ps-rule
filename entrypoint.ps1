@@ -1,5 +1,5 @@
 
-$sourcePath = $Env:SOURCE;
+$sourcePath = $Env:INPUT_SOURCE;
 $workspacePath = $Env:GITHUB_WORKSPACE;
 
 Write-Host "> Preparing PSRule";
