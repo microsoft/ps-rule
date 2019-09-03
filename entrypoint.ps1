@@ -29,6 +29,7 @@ try {
     Get-ChildItem -Path $workspacePath -File | Invoke-PSRule -Path $sourcePath -ErrorAction Stop;
 }
 catch {
+    Write-Error -Exception $_;
     $Host.SetShouldExit(1);
 }
 
