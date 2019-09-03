@@ -1,0 +1,14 @@
+# CI workflow for validating rule
+name: CI workflow
+on: [push]
+jobs:
+  run:
+    name: Run
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Run PSRule
+      uses: BernieWhite/PSRule-actions@bewhite/dev
+      with:
+        source: '.rule/'
