@@ -1,6 +1,6 @@
 # PSRule
 
-An GitHub action for IT Pros using the PSRule PowerShell module.
+A GitHub action for IT Pros using the PSRule PowerShell module.
 
 ## Disclaimer
 
@@ -12,9 +12,10 @@ If you have any problems please check our GitHub [issues](https://github.com/Ber
 
 To get started [create a workflow](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file).
 
-To include PSRule actions:
+To include PSRule:
 
 1. Reference `BernieWhite/PSRule-actions@bewhite/dev`.
+2. Configure `source`.
 
 For example:
 
