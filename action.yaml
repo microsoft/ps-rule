@@ -1,10 +1,16 @@
 name: 'PSRule'
 description: 'Run rules in a GitHub repository.'
 author: 'Bernie White'
+branding:
+  icon: 'chevrons-right'
+  color: 'blue'
 inputs: 
   source:
     description: 'Rule source location.'
-    default: '.rule/'
+    default: '.ps-rule/'
+  options:
+    description: 'Path to options file.'
+    default: '.ps-rule/ps-rule.yaml'
 runs:
   using: 'docker'
   image: 'Dockerfile'
