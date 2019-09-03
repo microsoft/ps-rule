@@ -2,6 +2,8 @@
 
 A GitHub action for IT Pros using the PSRule PowerShell module.
 
+![ci-badge]
+
 ## Disclaimer
 
 This project is to be considered a **proof-of-concept** and **not a supported product**.
@@ -42,3 +44,5 @@ jobs:
 ## License
 
 This project is [licensed under the MIT License](LICENSE).
+
+[ci-badge]: https://github.com/BernieWhite/PSRule-actions/workflows/CI%20workflow/badge.svg

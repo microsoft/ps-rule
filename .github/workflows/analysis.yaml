@@ -1,5 +1,5 @@
-# CI workflow for validating rule
-name: CI workflow
+# CI workflow for validating action
+name: analysis
 on: [push]
 jobs:
   run:
@@ -9,6 +9,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
     - name: Run PSRule
-      uses: BernieWhite/PSRule-actions@bewhite/dev
+      uses: BernieWhite/PSRule-actions@master
       with:
         source: '.rule/'
