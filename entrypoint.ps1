@@ -7,16 +7,21 @@
 $workspacePath = $Env:GITHUB_WORKSPACE;
 $sourcePath = Join-Path -Path $workspacePath -ChildPath $Env:INPUT_SOURCE;
 
-Write-Host '##[group] Preparing PSRule';
+if (!(Test-Path -Path $sourcePath)) {
+    Write-Host "`#`#[info] Source path '$sourcePath' does not exist.";
+    return;
+}
+
+Write-Host "`#`#[group] Preparing PSRule";
 $Null = Import-Module -Name /ps-rule/modules/PSRule;
 $moduleVersion = (Get-Module PSRule).Version.ToString();
 Write-Host "> Using PSRule v$moduleVersion";
 Write-Host '';
 Write-Host "> Using source: $sourcePath";
 Write-Host "> Using workspace: $workspacePath";
-Write-Host '##[endgroup]';
+Write-Host "`#`#[endgroup]";
 
-Write-Host '##[group] Executing rules';
+Write-Host '> Executing rules';
 Write-Host '';
 Write-Host '---';
 
@@ -28,5 +33,5 @@ catch {
 }
 
 Write-Host '---';
-Write-Host '##[endgroup]';
+Write-Host '';
 Write-Host '> All done.';

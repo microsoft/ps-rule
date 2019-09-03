@@ -45,4 +45,4 @@ jobs:
 
 This project is [licensed under the MIT License](LICENSE).
 
-[ci-badge]: https://github.com/BernieWhite/PSRule-actions/workflows/CI%20workflow/badge.svg
+[ci-badge]: https://github.com/BernieWhite/PSRule-actions/workflows/Build/badge.svg

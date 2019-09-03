@@ -1,9 +1,9 @@
 # CI workflow for validating action
-name: analysis
+name: Build
 on: [push]
 jobs:
   run:
-    name: Run
+    name: Analysis
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
