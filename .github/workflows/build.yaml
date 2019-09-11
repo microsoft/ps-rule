@@ -11,4 +11,4 @@ jobs:
     - name: Run PSRule
       uses: ./
       with:
-        source: '.rule/'
+        source: '.ps-rule/'
