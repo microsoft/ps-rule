@@ -21,12 +21,17 @@ Write-Host "> Using source: $sourcePath";
 Write-Host "> Using workspace: $workspacePath";
 Write-Host "`#`#[endgroup]";
 
+Write-Host '';
 Write-Host '> Executing rules';
 Write-Host '';
 Write-Host '---';
 
 try {
-    (Get-Item -Path $workspacePath), (Get-ChildItem -Path $workspacePath -File -Recurse) | Invoke-PSRule -Path $sourcePath;
+    $invokeParams = @{
+        Path = $sourcePath
+        Option = (New-PSRuleOption -TargetName FullName)
+    }
+    (Get-Item -Path $workspacePath), (Get-ChildItem -Path $workspacePath -File -Recurse) | Invoke-PSRule @invokeParams;
     if ($Null -ne $Error -and $Error.Count -gt 0) {
         $Host.SetShouldExit(1);
     }
