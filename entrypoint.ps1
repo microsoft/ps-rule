@@ -31,8 +31,8 @@ try {
         $Host.SetShouldExit(1);
     }
 }
-catch [System.Exception] {
-    Write-Error -Message $_.Message;
+catch {
+    Write-Host "`#`#[error] $($_.Message)";
     $Host.SetShouldExit(1);
 }
 
