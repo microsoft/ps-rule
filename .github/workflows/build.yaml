@@ -8,8 +8,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@master
-      env:
-        advice.detachedHead: false
     - name: Run PSRule
       uses: ./
       with:

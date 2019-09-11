@@ -29,12 +29,12 @@ try {
     (Get-Item -Path $workspacePath), (Get-ChildItem -Path $workspacePath -File -Recurse) | Invoke-PSRule -Path $sourcePath -ErrorAction Stop;
 }
 catch {
-    if ($_ -is [System.Exception]) {
-        Write-Error -Exception $_;
-    }
-    else {
-        Write-Error -ErrorRecord $_;
-    }
+    # if ($_ -is [System.Exception]) {
+    #     Write-Error -Exception $_;
+    # }
+    # else {
+    #     Write-Error -ErrorRecord $_;
+    # }
     $Host.SetShouldExit(1);
 }
 
