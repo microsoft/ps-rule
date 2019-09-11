@@ -15,7 +15,7 @@ if (!(Test-Path -Path $sourcePath)) {
 Write-Host "`#`#[group] Preparing PSRule";
 $Null = Import-Module -Name /ps-rule/modules/PSRule;
 $moduleVersion = (Get-Module PSRule).Version.ToString();
-Write-Host "> Using PSRule v$moduleVersion";
+Write-Host "> Using PSRule -- v$moduleVersion";
 Write-Host '';
 Write-Host "> Using source: $sourcePath";
 Write-Host "> Using workspace: $workspacePath";
@@ -26,7 +26,7 @@ Write-Host '';
 Write-Host '---';
 
 try {
-    Get-ChildItem -Path $workspacePath -File | Invoke-PSRule -Path $sourcePath -ErrorAction Stop;
+    (Get-Item -Path $workspacePath), (Get-ChildItem -Path $workspacePath -File -Recurse) | Invoke-PSRule -Path $sourcePath -ErrorAction Stop;
 }
 catch {
     Write-Error -Exception $_;
