@@ -26,15 +26,12 @@ Write-Host '';
 Write-Host '---';
 
 try {
-    (Get-Item -Path $workspacePath), (Get-ChildItem -Path $workspacePath -File -Recurse) | Invoke-PSRule -Path $sourcePath -ErrorAction Stop;
+    (Get-Item -Path $workspacePath), (Get-ChildItem -Path $workspacePath -File -Recurse) | Invoke-PSRule -Path $sourcePath;
+    if ($Null -ne $Error -and $Error.Count -gt 0) {
+        $Host.SetShouldExit(1);
+    }
 }
 catch {
-    # if ($_ -is [System.Exception]) {
-    #     Write-Error -Exception $_;
-    # }
-    # else {
-    #     Write-Error -ErrorRecord $_;
-    # }
     $Host.SetShouldExit(1);
 }
 
