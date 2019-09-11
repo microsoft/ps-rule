@@ -9,6 +9,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
     - name: Run PSRule
-      uses: BernieWhite/PSRule-actions@bewhite/add-workflow
+      uses: ./
       with:
         source: '.rule/'
