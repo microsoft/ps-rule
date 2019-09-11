@@ -32,8 +32,8 @@ try {
         Option = (New-PSRuleOption -TargetName 'FullName')
     }
     $items = New-Object -TypeName System.Collections.ArrayList;
-    $items.Add((Get-Item -Path $workspacePath));
-    $items.AddRange((Get-ChildItem -Path $workspacePath -File -Recurse));
+    $Null = $items.Add((Get-Item -Path $workspacePath));
+    $Null = $items.AddRange((Get-ChildItem -Path $workspacePath -File -Recurse));
     $items.ToArray() | Invoke-PSRule @invokeParams;
     if ($Null -ne $Error -and $Error.Count -gt 0) {
         $Host.SetShouldExit(1);
