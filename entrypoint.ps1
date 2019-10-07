@@ -36,12 +36,8 @@ try {
     $Null = $items.Add((Get-Item -Path $workspacePath));
     $Null = $items.AddRange((Get-ChildItem -Path $workspacePath -File -Recurse));
     $items.ToArray() | Assert-PSRule @invokeParams -ErrorAction Stop;
-    # if ($Null -ne $Error -and $Error.Count -gt 0) {
-    #     $Host.SetShouldExit(1);
-    # }
 }
 catch {
-    Write-Host "`#`#[error] $($_.Message)";
     $Host.SetShouldExit(1);
 }
 
