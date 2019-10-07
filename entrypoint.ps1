@@ -35,7 +35,7 @@ try {
     $items = New-Object -TypeName System.Collections.ArrayList;
     $Null = $items.Add((Get-Item -Path $workspacePath));
     $Null = $items.AddRange((Get-ChildItem -Path $workspacePath -File -Recurse));
-    $items.ToArray() | Assert-PSRule @invokeParams;
+    $items.ToArray() | Assert-PSRule @invokeParams -ErrorAction Stop;
     # if ($Null -ne $Error -and $Error.Count -gt 0) {
     #     $Host.SetShouldExit(1);
     # }
