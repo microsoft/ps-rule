@@ -30,14 +30,15 @@ try {
     $invokeParams = @{
         Path = $sourcePath
         Option = (New-PSRuleOption -TargetName 'FullName')
+        Style = 'GitHubActions'
     }
     $items = New-Object -TypeName System.Collections.ArrayList;
     $Null = $items.Add((Get-Item -Path $workspacePath));
     $Null = $items.AddRange((Get-ChildItem -Path $workspacePath -File -Recurse));
-    $items.ToArray() | Invoke-PSRule @invokeParams;
-    if ($Null -ne $Error -and $Error.Count -gt 0) {
-        $Host.SetShouldExit(1);
-    }
+    $items.ToArray() | Assert-PSRule @invokeParams;
+    # if ($Null -ne $Error -and $Error.Count -gt 0) {
+    #     $Host.SetShouldExit(1);
+    # }
 }
 catch {
     Write-Host "`#`#[error] $($_.Message)";
