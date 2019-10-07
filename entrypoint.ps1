@@ -12,17 +12,26 @@ if (!(Test-Path -Path $sourcePath)) {
     return;
 }
 
+Write-Host '
+    ____  _____ ____        __   
+   / __ \/ ___// __ \__  __/ /__ 
+  / /_/ /\__ \/ /_/ / / / / / _ \
+ / ____/___/ / _, _/ /_/ / /  __/
+/_/    /____/_/ |_|\__,_/_/\___/ 
+                                 
+'
+
 Write-Host "`#`#[group] Preparing PSRule";
 $Null = Import-Module -Name /ps-rule/modules/PSRule;
 $moduleVersion = (Get-Module PSRule).Version.ToString();
-Write-Host "> Using PSRule -- v$moduleVersion";
+Write-Host "Using PSRule -- v$moduleVersion";
 Write-Host '';
-Write-Host "> Using source: $sourcePath";
-Write-Host "> Using workspace: $workspacePath";
+Write-Host "Using source: $sourcePath";
+Write-Host "Using workspace: $workspacePath";
 Write-Host "`#`#[endgroup]";
 
 Write-Host '';
-Write-Host '> Executing rules';
+Write-Host 'Executing rules';
 Write-Host '';
 Write-Host '---';
 
