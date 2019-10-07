@@ -4,6 +4,7 @@ Rule 'Repos.GH.Contribute' -Type 'System.IO.DirectoryInfo' {
     $requiredFiles = @(
         'CHANGELOG.md'
         'LICENSE'
+        'CONTRIBUTING.md'
         '.github/CODEOWNERS'
         '.github/PULL_REQUEST_TEMPLATE.md'
     )
