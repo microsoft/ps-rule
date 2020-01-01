@@ -6,6 +6,7 @@
 
 $workspacePath = $Env:GITHUB_WORKSPACE;
 $sourcePath = Join-Path -Path $workspacePath -ChildPath $Env:INPUT_SOURCE;
+$repository = $Env:INPUT_REPOSITORY;
 
 if (!(Test-Path -Path $sourcePath)) {
     Write-Host "`#`#[info] Source path '$sourcePath' does not exist.";
@@ -14,7 +15,6 @@ if (!(Test-Path -Path $sourcePath)) {
 
 Write-Host "`#`#[group] Preparing PSRule";
 $Null = Import-Module -Name /ps-rule/modules/PSRule;
-$moduleVersion = (Get-Module PSRule).Version.ToString();
 Write-Host "Using source: $sourcePath";
 Write-Host "Using workspace: $workspacePath";
 Write-Host "`#`#[endgroup]";
@@ -22,7 +22,7 @@ Write-Host "`#`#[endgroup]";
 Write-Host '';
 Write-Host '---';
 
-try {
+# try {
     $invokeParams = @{
         Path = $sourcePath
         Option = (New-PSRuleOption -TargetName 'FullName')
@@ -32,9 +32,9 @@ try {
     $Null = $items.Add((Get-Item -Path $workspacePath));
     $Null = $items.AddRange((Get-ChildItem -Path $workspacePath -File -Recurse));
     $items.ToArray() | Assert-PSRule @invokeParams -ErrorAction Stop;
-}
-catch {
-    $Host.SetShouldExit(1);
-}
+# }
+# catch {
+#     $Host.SetShouldExit(1);
+# }
 
 Write-Host '---';
