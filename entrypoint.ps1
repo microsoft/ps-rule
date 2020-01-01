@@ -32,6 +32,7 @@ Write-Host '---';
     $Null = $items.Add((Get-Item -Path $workspacePath));
     $Null = $items.AddRange((Get-ChildItem -Path $workspacePath -File -Recurse));
     $items.ToArray() | Assert-PSRule @invokeParams -ErrorAction Stop;
+    $LASTEXITCODE
 # }
 # catch {
 #     $Host.SetShouldExit(1);
