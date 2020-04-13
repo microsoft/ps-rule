@@ -22,20 +22,20 @@ Write-Host "`#`#[endgroup]";
 Write-Host '';
 Write-Host '---';
 
-# try {
+try {
     $invokeParams = @{
         Path = $sourcePath
         Option = (New-PSRuleOption -TargetName 'FullName')
         Style = 'GitHubActions'
+        ErrorAction = 'Stop'
     }
     $items = New-Object -TypeName System.Collections.ArrayList;
     $Null = $items.Add((Get-Item -Path $workspacePath));
     $Null = $items.AddRange((Get-ChildItem -Path $workspacePath -File -Recurse));
-    $items.ToArray() | Assert-PSRule @invokeParams -ErrorAction Stop;
-    $LASTEXITCODE
-# }
-# catch {
-#     $Host.SetShouldExit(1);
-# }
+    $items.ToArray() | Assert-PSRule @invokeParams;
+}
+catch {
+    $Host.SetShouldExit(1);
+}
 
 Write-Host '---';
