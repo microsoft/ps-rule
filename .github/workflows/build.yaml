@@ -11,5 +11,5 @@ jobs:
     - name: Run PSRule
       uses: ./
       with:
-        source: '.ps-rule/'
+        inputType: repository
         modules: PSRule.Rules.Azure, PSRule.Rules.Kubernetes

@@ -8,7 +8,7 @@ inputs:
 
   inputType:
     description: 'Determines the type of input to use for PSRule.'
-    default: ''
+    # default: ''
     required: true
 
   inputPath:
