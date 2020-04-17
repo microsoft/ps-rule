@@ -100,6 +100,7 @@ $moduleParams = @{
 
 # Install each module if not already installed
 foreach ($m in $moduleNames) {
+    $m = $m.Trim();
     Write-Host "> Checking module: $m";
     if ($Null -eq (Get-InstalledModule -Name $m -ErrorAction Ignore)) {
         Write-Host '  - Installing module';
