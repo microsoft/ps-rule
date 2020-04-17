@@ -86,7 +86,7 @@ function WriteDebug {
 }
 
 # Setup paths for importing modules
-$modulesPath = Join-Path -Path $PSScriptRoot -ChildPath 'ps_modules' -Resolve;
+$modulesPath = '/ps_modules/';
 if ((Get-Variable -Name IsMacOS -ErrorAction Ignore) -or (Get-Variable -Name IsLinux -ErrorAction Ignore)) {
     $moduleSearchPaths = $Env:PSModulePath.Split(':', [System.StringSplitOptions]::RemoveEmptyEntries);
     if ($modulesPath -notin $moduleSearchPaths) {
