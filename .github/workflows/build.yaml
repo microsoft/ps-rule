@@ -11,4 +11,13 @@ jobs:
     - name: Run PSRule
       uses: ./
       with:
-        source: '.ps-rule/'
+        inputType: repository
+        modules: PSRule.Rules.Azure,PSRule.Rules.Kubernetes
+        outputFormat: NUnit3
+        outputPath: reports/ps-rule-results.xml
+    - name: PSRule results
+      uses: actions/upload-artifact@v1
+      if: always()
+      with:
+        name: PSRule-results
+        path: reports/ps-rule-results.xml
