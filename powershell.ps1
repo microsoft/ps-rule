@@ -39,7 +39,6 @@ param (
 
 $workspacePath = $Env:GITHUB_WORKSPACE;
 $sourcePath = Join-Path -Path $workspacePath -ChildPath $Env:INPUT_SOURCE;
-$repository = $Env:INPUT_REPOSITORY;
 
 if ($Env:SYSTEM_DEBUG -eq 'true') {
     $VerbosePreference = 'Continue';
@@ -98,6 +97,8 @@ $moduleParams = @{
     Force = $True
 }
 
+Write-Host "`#`#[group] Preparing PSRule";
+
 # Install each module if not already installed
 foreach ($m in $moduleNames) {
     $m = $m.Trim();
@@ -126,10 +127,6 @@ Write-Host "[info] Using InputPath: $InputPath";
 Write-Host "[info] Using OutputFormat: $OutputFormat";
 Write-Host "[info] Using OutputPath: $OutputPath";
 
-Write-Host "`#`#[group] Preparing PSRule";
-# $Null = Import-Module -Name /ps-rule/modules/PSRule;
-Write-Host "Using source: $sourcePath";
-Write-Host "Using workspace: $workspacePath";
 Write-Host "`#`#[endgroup]";
 
 try {
