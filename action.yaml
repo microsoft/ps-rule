@@ -4,13 +4,37 @@ author: 'Bernie White'
 branding:
   icon: 'chevrons-right'
   color: 'blue'
-inputs: 
+inputs:
+
+  inputType:
+    description: 'Determines the type of input to use for PSRule.'
+    default: ''
+    required: true
+
+  inputPath:
+    description: 'The path PSRule will look for files to validate.'
+    default: ''
+
+  modules:
+    description: 'A comma separated list of modules to use for analysis.'
+    default: ''
+
   source:
-    description: 'Rule source location.'
+    description: 'An path containing rules to use for analysis.'
     default: '.ps-rule/'
-  options:
-    description: 'Path to options file.'
-    default: '.ps-rule/ps-rule.yaml'
+
+  outputFormat:
+    description: 'The format to use when writing results to disk. When set to `None` results are not written to disk.'
+    default: 'None'
+
+  outputPath:
+    description: 'The working directory PSRule is run from.'
+    default: ''
+
+  path:
+    description: 'The working directory PSRule is run from.'
+    default: ''
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
