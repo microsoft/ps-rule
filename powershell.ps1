@@ -117,6 +117,13 @@ foreach ($m in $moduleNames) {
     }
 }
 
+Write-Host '';
+Write-Host "[info] Using Path: $Path";
+Write-Host "[info] Using Source: $Source";
+Write-Host "[info] Using InputType: $InputType";
+Write-Host "[info] Using InputPath: $InputPath";
+Write-Host "[info] Using OutputFormat: $OutputFormat";
+Write-Host "[info] Using OutputPath: $OutputPath";
 
 Write-Host "`#`#[group] Preparing PSRule";
 # $Null = Import-Module -Name /ps-rule/modules/PSRule;
@@ -124,23 +131,51 @@ Write-Host "Using source: $sourcePath";
 Write-Host "Using workspace: $workspacePath";
 Write-Host "`#`#[endgroup]";
 
-Write-Host '';
-Write-Host '---';
-
 try {
+    Push-Location -Path $Path;
     $invokeParams = @{
-        Path = $sourcePath
+        Path = $Source
         Option = (New-PSRuleOption -TargetName 'FullName')
         Style = 'GitHubActions'
         ErrorAction = 'Stop'
     }
-    $items = New-Object -TypeName System.Collections.ArrayList;
-    $Null = $items.Add((Get-Item -Path $workspacePath));
-    $Null = $items.AddRange((Get-ChildItem -Path $workspacePath -File -Recurse));
-    $items.ToArray() | Assert-PSRule @invokeParams;
+    WriteDebug "Preparing command-line:";
+    WriteDebug ([String]::Concat('-Path ''', $Source, ''''));
+    if (![String]::IsNullOrEmpty($Modules)) {
+        $moduleNames = $Modules.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries);
+        $invokeParams['Module'] = $moduleNames;
+        WriteDebug ([String]::Concat('-Module ', [String]::Join(', ', $moduleNames)));
+    }
+    if (![String]::IsNullOrEmpty($OutputFormat) -and ![String]::IsNullOrEmpty($OutputPath) -and $OutputFormat -ne 'None') {
+        $invokeParams['OutputFormat'] = $OutputFormat;
+        $invokeParams['OutputPath'] = $OutputPath;
+        WriteDebug ([String]::Concat('-OutputFormat ', $OutputFormat, ' -OutputPath ''', $OutputPath, ''''));
+    }
+
+    # Repository
+    if ($InputType -eq 'repository') {
+        $items = New-Object -TypeName System.Collections.ArrayList;
+        WriteDebug 'Running ''Assert-PSRule'' with repository as input.';
+        $Null = $items.Add((Get-Item -Path $InputPath));
+        $Null = $items.AddRange((Get-ChildItem -Path $InputPath -File -Recurse));
+        Write-Host '';
+        Write-Host '---';
+        $items.ToArray() | Assert-PSRule @invokeParams;
+    }
+    # Repository
+    elseif ($InputType -eq 'inputPath') {
+        WriteDebug 'Running ''Assert-PSRule'' with input from path.';
+        Write-Host '';
+        Write-Host '---';
+        Assert-PSRule @invokeParams -InputPath $InputPath;
+    }
 }
 catch {
+    # Write-Host "`#`#vso[task.logissue type=error]$(Get-VstsLocString -Key 'AssertFailed')";
+    # Write-Host "`#`#vso[task.complete result=Failed;]FAILED";
     $Host.SetShouldExit(1);
 }
-
+finally {
+    Pop-Location;
+}
 Write-Host '---';

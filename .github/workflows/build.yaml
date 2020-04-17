@@ -12,3 +12,4 @@ jobs:
       uses: ./
       with:
         source: '.ps-rule/'
+        modules: PSRule.Rules.Azure, PSRule.Rules.Kubernetes
