@@ -181,6 +181,7 @@ try {
     }
 }
 catch {
+    Write-Host "::error::One or more assertions failed.";
     $Host.SetShouldExit(1);
 }
 finally {
