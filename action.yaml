@@ -8,7 +8,6 @@ inputs:
 
   inputType:
     description: 'Determines the type of input to use for PSRule.'
-    # default: ''
     required: true
 
   inputPath:
@@ -24,11 +23,11 @@ inputs:
     default: '.ps-rule/'
 
   outputFormat:
-    description: 'The format to use when writing results to disk. When set to `None` results are not written to disk.'
+    description: 'The format to use when writing results to disk. When set to None results are not written to disk.'
     default: 'None'
 
   outputPath:
-    description: 'The working directory PSRule is run from.'
+    description: 'The file path to write results to.'
     default: ''
 
   path:

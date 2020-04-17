@@ -38,26 +38,38 @@ param (
 )
 
 $workspacePath = $Env:GITHUB_WORKSPACE;
-$sourcePath = Join-Path -Path $workspacePath -ChildPath $Env:INPUT_SOURCE;
-
+$ProgressPreference = [System.Management.Automation.ActionPreference]::SilentlyContinue;
 if ($Env:SYSTEM_DEBUG -eq 'true') {
-    $VerbosePreference = 'Continue';
+    $VerbosePreference = [System.Management.Automation.ActionPreference]::Continue;
 }
+
+# Set workspace
+if ([String]::IsNullOrEmpty($workspacePath)) {
+    $workspacePath = $PWD;
+}
+
+# Set Path
 if ([String]::IsNullOrEmpty($Path)) {
     $Path = $workspacePath;
 }
-if ([String]::IsNullOrEmpty($Path)) {
-    $Path = $PWD;
+else {
+    $Path = Join-Path -Path $workspacePath -ChildPath $Path;
 }
+
+# Set InputPath
 if ([String]::IsNullOrEmpty($InputPath)) {
     $InputPath = $Path;
 }
+else {
+    $InputPath = Join-Path -Path $Path -ChildPath $InputPath;
+}
+
+# Set Source
 if ([String]::IsNullOrEmpty($Source)) {
     $Source = Join-Path -Path $Path -ChildPath '.ps-rule/';
 }
-if (!(Test-Path -Path $Source)) {
-    Write-Host "[info] Source '$Source' does not exist.";
-    Write-Host '';
+else {
+    $Source = Join-Path -Path $Path -ChildPath $Source;
 }
 
 function WriteDebug {
@@ -169,8 +181,6 @@ try {
     }
 }
 catch {
-    # Write-Host "`#`#vso[task.logissue type=error]$(Get-VstsLocString -Key 'AssertFailed')";
-    # Write-Host "`#`#vso[task.complete result=Failed;]FAILED";
     $Host.SetShouldExit(1);
 }
 finally {
