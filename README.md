@@ -32,10 +32,16 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
     - name: Run PSRule
-      uses: BernieWhite/PSRule-actions@bewhite/dev
+      uses: BernieWhite/PSRule-actions@master
       with:
-        source: '.rule/'
+        source: '.ps-rule/'
 ```
+
+### Action reference
+
+The following action options exist:
+
+- [Action](docs/actions.md)
 
 ## Maintainers
 
