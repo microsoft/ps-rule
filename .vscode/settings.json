@@ -1,0 +1,18 @@
+{
+    "files.exclude": {
+        "reports/": true,
+        "out/": true,
+        ".vs/": true
+    },
+    "search.exclude": {
+        "out/": true
+    },
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "[yaml]": {
+        "editor.tabSize": 2
+    },
+    "[markdown]": {
+        "editor.tabSize": 2
+    }
+}
