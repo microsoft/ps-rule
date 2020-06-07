@@ -1,20 +1,20 @@
 
 info:
-  name: PSRule-actions
-  description: A GitHub action for IT Pros using the PSRule PowerShell module.
-  url: https://github.com/BernieWhite/PSRule-actions
+  name: PSRule
+  description: Validate infrastructure as code (IaC) and DevOps repositories using GitHub Actions.
+  url: https://github.com/Microsoft/ps-rule
 
 repository:
   type: git
-  url: https://github.com/BernieWhite/PSRule-actions.git
+  url: https://github.com/Microsoft/ps-rule.git
 
 license: MIT
 
 bugs:
-  url: https://github.com/BernieWhite/PSRule-actions/issues
+  url: https://github.com/Microsoft/ps-rule/issues
 
 modules:
-  PSRule: ^0.16.0
+  PSRule: ^0.18.0
 
 tasks:
   clear:

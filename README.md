@@ -10,14 +10,14 @@ Analysis can be performed from input files or the repository structure.
 
 ```yaml
 - name: Run PSRule analysis
-  uses: BernieWhite/PSRule-actions@master
+  uses: Microsoft/ps-rule@master
 ```
 
 ## Inputs
 
 ```yaml
 - name: Run PSRule analysis
-  uses: BernieWhite/PSRule-actions@master
+  uses: Microsoft/ps-rule@master
   with:
     inputType: repository, inputPath              # Required. Determines the type of input to use for PSRule.
     inputPath: string                             # Required. The path PSRule will look for files to validate.
@@ -85,7 +85,7 @@ To get started [create a workflow](https://help.github.com/en/articles/configuri
 
 To include PSRule:
 
-1. Reference `BernieWhite/PSRule-actions@master`.
+1. Reference `Microsoft/ps-rule@master`.
 2. Configure `inputType`.
 
 For example:
@@ -101,7 +101,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
     - name: Run PSRule analysis
-      uses: BernieWhite/PSRule-actions@master
+      uses: Microsoft/ps-rule@master
       with:
         inputType: 'repository'
 ```
@@ -131,4 +131,4 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 This project is [licensed under the MIT License](LICENSE).
 
-[ci-badge]: https://github.com/BernieWhite/PSRule-actions/workflows/Build/badge.svg
+[ci-badge]: https://github.com/Microsoft/ps-rule/workflows/Build/badge.svg

@@ -35,7 +35,7 @@ Check out the links below to get started.
 
 ## Contributing to issues
 
-- Check if the issue you are going to file already exists in our GitHub [issues](https://github.com/BernieWhite/PSRule-actions/issues).
+- Check if the issue you are going to file already exists in our GitHub [issues](https://github.com/Microsoft/ps-rule/issues).
 - If you do not see your problem captured, please file a new issue and follow the provided template.
 - If the an open issue exists for the problem you are experiencing, vote up the issue or add a comment.
 

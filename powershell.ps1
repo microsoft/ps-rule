@@ -5,7 +5,7 @@
 # PSRule
 #
 
-# See details at: https://github.com/BernieWhite/PSRule-actions
+# See details at: https://github.com/Microsoft/ps-rule
 
 [CmdletBinding()]
 param (
