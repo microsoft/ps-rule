@@ -17,10 +17,10 @@ Analysis can be performed from input files or the repository structure.
 - name: Run PSRule analysis
   uses: Microsoft/ps-rule@master
   with:
-    inputType: repository, inputPath              # Required. Determines the type of input to use for PSRule.
-    inputPath: string                             # Required. The path PSRule will look for files to validate.
+    inputType: repository, inputPath              # Optional. Determines the type of input to use for PSRule.
+    inputPath: string                             # Optional. The path PSRule will look for files to validate.
     modules: string                               # Optional. A comma separated list of modules to use for analysis.
-    source: string                                # Optional. An path containing rules to use for analysis.
+    source: string                                # Optional. A path containing rules to use for analysis.
     outputFormat: None, Yaml, Json, NUnit3, Csv   # Optional. The format to use when writing results to disk.
     outputPath: string                            # Optional. The file path to write results to.
     path: string                                  # Optional. The working directory PSRule is run from.
@@ -28,52 +28,47 @@ Analysis can be performed from input files or the repository structure.
 
 ### `inputType`
 
-Determines the type of input to use for PSRule.
+Determines the type of input to use for PSRule either `repository` or `inputPath`.
+Defaults to `repository`.
 
-Either `repository` or `inputPath`.
-When `inputType: inputPath` is used, supported file formats within `inputPath` will be read as objects.
-When `inputType: repository` is used, the structure of the repository will be analyzed instead.
+When set to:
+
+- `repository` - The structure of the repository within `inputPath` will be analyzed.
+- `inputPath` - Supported file formats within `inputPath` will be read as objects.
 
 ### `inputPath`
 
-Set the `inputPath` to determine where PSRule will look for input files.
-
-When `inputType: inputPath` this is binds to the [-InputPath](https://microsoft.github.io/PSRule/commands/PSRule/en-US/Assert-PSRule.html#-inputpath) parameter.
-When `inputType: repository` this will be the repository root that PSRule analyzes.
+The path PSRule will look for input files.
+Defaults to repository root.
 
 ### `modules`
 
 A comma separated list of modules to use for analysis.
 
-Install PSRule modules using the `ps-rule-install` task.
-If the modules have not been installed,
-the latest stable version will be installed from the PowerShell Gallery automatically.
-For example: _PSRule.Rules.Azure,PSRule.Rules.Kubernetes_
+Modules are additional packages that can be installed from the PowerShell Gallery.
+PSRule will install the latest stable version from the PowerShell Gallery automatically.
 
 ### `source`
 
 An path containing rules to use for analysis.
+Defaults to `.ps-rule/`.
 
 Use this option to include rules not installed as a PowerShell module.
-This binds to the [-Path](https://microsoft.github.io/PSRule/commands/PSRule/en-US/Assert-PSRule.html#-path) parameter.
 
 ### `outputFormat`
 
-Output results can be written to disk in addition to the default output.
-
-Use this option to determine the format to write results.
-By default, results are not written to disk.
-This binds to the [-OutputFormat](https://microsoft.github.io/PSRule/commands/PSRule/en-US/Assert-PSRule.html#-outputformat) parameter.
+The output format to write result to disk.
+Supported formats are `Yaml`, `Json`, `NUnit3`, `Csv`.
+Defaults to `None`.
 
 ### `outputPath`
 
-The file path to write results to.
-
-This binds to the [-OutputPath](https://microsoft.github.io/PSRule/commands/PSRule/en-US/Assert-PSRule.html#-outputpath) parameter.
+The file path to write results to when `outputFormat` is configured.
 
 ### `path`
 
 The working directory PSRule is run from.
+Defaults to repository root.
 
 Options specified in `ps-rule.yaml` from this directory will be used unless overridden by inputs.
 
@@ -89,15 +84,17 @@ To include PSRule:
 For example:
 
 ```yaml
-name: Rule workflow
+name: CI
 on: [push]
 jobs:
-  run:
-    name: Run
+  analyze:
+    name: Analyze repository
     runs-on: ubuntu-latest
     steps:
+
     - name: Checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@v2
+
     - name: Run PSRule analysis
       uses: Microsoft/ps-rule@master
       with:
