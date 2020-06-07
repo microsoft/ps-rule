@@ -44,5 +44,3 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - MODULE_VERSION=0.18.0
