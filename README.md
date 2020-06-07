@@ -4,8 +4,6 @@ Validate infrastructure as code (IaC) and DevOps repositories using rules.
 PSRule allows you to analyse a repository with pre-built rules or create your own.
 Analysis can be performed from input files or the repository structure.
 
-![ci-badge]
-
 ## Usage
 
 ```yaml
@@ -130,5 +128,3 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 ## License
 
 This project is [licensed under the MIT License](LICENSE).
-
-[ci-badge]: https://github.com/Microsoft/ps-rule/workflows/Build/badge.svg
