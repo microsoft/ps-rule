@@ -150,7 +150,6 @@ try {
     Push-Location -Path $Path;
     $invokeParams = @{
         Path = $Source
-        Option = (New-PSRuleOption -TargetName 'FullName')
         Style = 'GitHubActions'
         ErrorAction = 'Stop'
     }
@@ -175,7 +174,7 @@ try {
         $Null = $items.AddRange((Get-ChildItem -Path $InputPath -File -Recurse));
         Write-Host '';
         Write-Host '---';
-        $items.ToArray() | Assert-PSRule @invokeParams;
+        $items.ToArray() | Assert-PSRule -Option (New-PSRuleOption -TargetName 'FullName') @invokeParams;
     }
     # inputPath
     elseif ($InputType -eq 'inputPath') {
