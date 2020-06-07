@@ -12,7 +12,6 @@ jobs:
       uses: ./
       with:
         inputType: repository
-        modules: PSRule.Rules.Azure,PSRule.Rules.Kubernetes
         outputFormat: NUnit3
         outputPath: reports/ps-rule-results.xml
     - name: PSRule results
