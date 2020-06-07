@@ -13,26 +13,32 @@ inputs:
   inputPath:
     description: 'The path PSRule will look for files to validate.'
     default: ''
+    required: false
 
   modules:
     description: 'A comma separated list of modules to use for analysis.'
     default: ''
+    required: false
 
   source:
     description: 'An path containing rules to use for analysis.'
     default: '.ps-rule/'
+    required: false
 
   outputFormat:
     description: 'The format to use when writing results to disk. When set to None results are not written to disk.'
     default: 'None'
+    required: false
 
   outputPath:
     description: 'The file path to write results to.'
     default: ''
+    required: false
 
   path:
     description: 'The working directory PSRule is run from.'
     default: ''
+    required: false
 
 runs:
   using: 'docker'

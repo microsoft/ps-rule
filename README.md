@@ -34,7 +34,7 @@ jobs:
     - name: Run PSRule
       uses: BernieWhite/PSRule-actions@master
       with:
-        source: '.ps-rule/'
+        inputType: 'repository'
 ```
 
 ### Action reference
