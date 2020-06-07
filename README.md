@@ -98,6 +98,7 @@ jobs:
     - name: Run PSRule analysis
       uses: Microsoft/ps-rule@master
 ```
+
 3. Create rules within the `.ps-rule/` directory.
 For example:
 
@@ -121,6 +122,8 @@ Rule 'GitHub.Community' -Type 'System.IO.DirectoryInfo' {
     }
 }
 ```
+
+4. Run the workflow.
 
 ## Contributing
 
