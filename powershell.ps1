@@ -42,14 +42,13 @@ param (
 
 $workspacePath = $Env:GITHUB_WORKSPACE;
 $ProgressPreference = [System.Management.Automation.ActionPreference]::SilentlyContinue;
-if ($Env:SYSTEM_DEBUG -eq 'true') {
+if ($Env:SYSTEM_DEBUG -eq 'true' -or $Env:ACTIONS_STEP_DEBUG -eq 'true') {
     $VerbosePreference = [System.Management.Automation.ActionPreference]::Continue;
 }
 
 # Check inputType
 if ([String]::IsNullOrEmpty($InputType) -or $InputType -notin 'repository', 'inputPath') {
-    Write-Host "::error::Required input 'inputType' must be set to 'repository' or 'inputPath'.";
-    $Host.SetShouldExit(1);
+    $InputType = 'repository';
 }
 
 # Set workspace
@@ -88,8 +87,8 @@ function WriteDebug {
         [String]$Message
     )
     process {
-        if ($Env:SYSTEM_DEBUG -eq 'true') {
-            Write-Host "[debug] $Message";
+        if ($Env:SYSTEM_DEBUG -eq 'true' -or $Env:ACTIONS_STEP_DEBUG -eq 'true') {
+            Write-Host "::debug::$Message";
         }
     }
 }
@@ -118,7 +117,7 @@ $moduleParams = @{
     Force = $True
 }
 
-Write-Host "`#`#[group] Preparing PSRule";
+# Write-Host "`#`#[group] Preparing PSRule";
 
 # Install each module if not already installed
 foreach ($m in $moduleNames) {
@@ -148,7 +147,7 @@ Write-Host "[info] Using InputPath: $InputPath";
 Write-Host "[info] Using OutputFormat: $OutputFormat";
 Write-Host "[info] Using OutputPath: $OutputPath";
 
-Write-Host "`#`#[endgroup]";
+# Write-Host "`#`#[endgroup]";
 
 try {
     Push-Location -Path $Path;
