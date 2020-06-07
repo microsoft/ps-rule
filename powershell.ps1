@@ -43,6 +43,12 @@ if ($Env:SYSTEM_DEBUG -eq 'true') {
     $VerbosePreference = [System.Management.Automation.ActionPreference]::Continue;
 }
 
+# Check inputType
+if ([String]::IsNullOrEmpty($InputType) -or $InputType -notin 'repository', 'inputPath') {
+    Write-Host "::error::Required input 'inputType' must be set to 'repository' or 'inputPath'.";
+    $Host.SetShouldExit(1);
+}
+
 # Set workspace
 if ([String]::IsNullOrEmpty($workspacePath)) {
     $workspacePath = $PWD;
@@ -162,7 +168,7 @@ try {
         WriteDebug ([String]::Concat('-OutputFormat ', $OutputFormat, ' -OutputPath ''', $OutputPath, ''''));
     }
 
-    # Repository
+    # repository
     if ($InputType -eq 'repository') {
         $items = New-Object -TypeName System.Collections.ArrayList;
         WriteDebug 'Running ''Assert-PSRule'' with repository as input.';
@@ -172,7 +178,7 @@ try {
         Write-Host '---';
         $items.ToArray() | Assert-PSRule @invokeParams;
     }
-    # Repository
+    # inputPath
     elseif ($InputType -eq 'inputPath') {
         WriteDebug 'Running ''Assert-PSRule'' with input from path.';
         Write-Host '';
