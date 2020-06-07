@@ -1,11 +1,9 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
 
-ARG fromTag=alpine-3.8
-ARG imageRepo=mcr.microsoft.com/powershell
 ARG MODULE_VERSION=0.18.0
 
-FROM ${imageRepo}:${fromTag}
+FROM mcr.microsoft.com/powershell:7.0.1-alpine-3.8
 SHELL ["pwsh", "-Command"]
 RUN $ProgressPreference = [System.Management.Automation.ActionPreference]::SilentlyContinue; \
     $Null = New-Item -Path /ps_modules/ -ItemType Directory -Force; \
