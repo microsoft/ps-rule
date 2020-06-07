@@ -1,6 +1,6 @@
 name: 'PSRule'
 description: 'Run rules in a GitHub repository.'
-author: 'Bernie White'
+author: 'Microsoft'
 branding:
   icon: 'check-circle'
   color: 'green'
