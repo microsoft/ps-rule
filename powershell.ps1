@@ -42,7 +42,7 @@ param (
 
 $workspacePath = $Env:GITHUB_WORKSPACE;
 $ProgressPreference = [System.Management.Automation.ActionPreference]::SilentlyContinue;
-if ($Env:SYSTEM_DEBUG -eq 'true' -or $Env:ACTIONS_STEP_DEBUG -eq 'true') {
+if ($Env:SYSTEM_DEBUG -eq 'true') {
     $VerbosePreference = [System.Management.Automation.ActionPreference]::Continue;
 }
 
