@@ -117,8 +117,6 @@ $moduleParams = @{
     Force = $True
 }
 
-# Write-Host "`#`#[group] Preparing PSRule";
-
 # Install each module if not already installed
 foreach ($m in $moduleNames) {
     $m = $m.Trim();
@@ -140,14 +138,13 @@ foreach ($m in $moduleNames) {
 }
 
 Write-Host '';
+Write-Host "[info] Using Action: $Env:GITHUB_ACTION";
 Write-Host "[info] Using Path: $Path";
 Write-Host "[info] Using Source: $Source";
 Write-Host "[info] Using InputType: $InputType";
 Write-Host "[info] Using InputPath: $InputPath";
 Write-Host "[info] Using OutputFormat: $OutputFormat";
 Write-Host "[info] Using OutputPath: $OutputPath";
-
-# Write-Host "`#`#[endgroup]";
 
 try {
     Push-Location -Path $Path;
