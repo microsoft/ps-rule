@@ -84,15 +84,17 @@ To include PSRule:
 For example:
 
 ```yaml
-name: Rule workflow
+name: CI
 on: [push]
 jobs:
-  run:
-    name: Run
+  analyze:
+    name: Analyze repository
     runs-on: ubuntu-latest
     steps:
+
     - name: Checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@v2
+
     - name: Run PSRule analysis
       uses: Microsoft/ps-rule@master
       with:
