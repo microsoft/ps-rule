@@ -43,6 +43,12 @@ if ($Env:SYSTEM_DEBUG -eq 'true') {
     $VerbosePreference = [System.Management.Automation.ActionPreference]::Continue;
 }
 
+# Check inputType
+if ([String]::IsNullOrEmpty($InputType) -or $InputType -notin 'repository', 'inputPath') {
+    Write-Host "::error::Required input 'inputType' must be set to 'repository' or 'inputPath'.";
+    $Host.SetShouldExit(1);
+}
+
 # Set workspace
 if ([String]::IsNullOrEmpty($workspacePath)) {
     $workspacePath = $PWD;
