@@ -4,6 +4,8 @@ Validate infrastructure as code (IaC) and DevOps repositories using rules.
 PSRule allows you to analyse a repository with pre-built rules or create your own.
 Analysis can be performed from input files or the repository structure.
 
+To learn about PSRule and how to write your own rules see [Getting started](https://github.com/microsoft/PSRule#getting-started).
+
 ## Usage
 
 ```yaml
@@ -46,14 +48,15 @@ Defaults to repository root.
 A comma separated list of modules to use for analysis.
 
 Modules are additional packages that can be installed from the PowerShell Gallery.
-PSRule will install the latest stable version from the PowerShell Gallery automatically.
+PSRule will install the latest **stable** version from the PowerShell Gallery automatically.
+[Available modules](https://www.powershellgallery.com/packages?q=Tags:%22PSRule-rules%22).
 
 ### `source`
 
 An path containing rules to use for analysis.
 Defaults to `.ps-rule/`.
 
-Use this option to include rules not installed as a PowerShell module.
+Use this option to include rules that have not been packaged as a module.
 
 ### `outputFormat`
 
@@ -74,13 +77,10 @@ Options specified in `ps-rule.yaml` from this directory will be used unless over
 
 ## Using the action
 
-To get started [create a workflow](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file).
+To use PSRule:
 
-To include PSRule:
-
-1. Reference `Microsoft/ps-rule@master`.
-2. Configure `inputType`.
-
+1. See [Creating a workflow file](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file).
+2. Reference `Microsoft/ps-rule@master`.
 For example:
 
 ```yaml
@@ -97,8 +97,29 @@ jobs:
 
     - name: Run PSRule analysis
       uses: Microsoft/ps-rule@master
-      with:
-        inputType: 'repository'
+```
+3. Create rules within the `.ps-rule/` directory.
+For example:
+
+```powershell
+# Example .ps-rule/GitHub.Community.Rule.ps1
+
+# Synopsis: Check for recommended community files
+Rule 'GitHub.Community' -Type 'System.IO.DirectoryInfo' {
+    $requiredFiles = @(
+        'README.md'
+        'LICENSE'
+        'CODE_OF_CONDUCT.md'
+        'CONTRIBUTING.md'
+        '.github/CODEOWNERS'
+        '.github/PULL_REQUEST_TEMPLATE.md'
+    )
+    Test-Path -Path $TargetObject.FullName;
+    for ($i = 0; $i -lt $requiredFiles.Length; $i++) {
+        $filePath = Join-Path -Path $TargetObject.FullName -ChildPath $requiredFiles[$i];
+        $Assert.Create((Test-Path -Path $filePath -PathType Leaf), "$($requiredFiles[$i]) does not exist");
+    }
+}
 ```
 
 ## Contributing
