@@ -1,19 +1,23 @@
 # CI workflow for validating action
 name: Build
-on: [push]
+on:
+  - pull_request
 jobs:
   run:
-    name: Analysis
+    name: Analyze repository
     runs-on: ubuntu-latest
     steps:
+
     - name: Checkout
       uses: actions/checkout@main
+
     - name: Run PSRule analysis
       uses: ./
       with:
         inputType: repository
         outputFormat: NUnit3
         outputPath: reports/ps-rule-results.xml
+
     - name: PSRule results
       uses: actions/upload-artifact@v1
       if: always()
