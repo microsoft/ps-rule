@@ -10,14 +10,14 @@ To learn about PSRule and how to write your own rules see [Getting started](http
 
 ```yaml
 - name: Run PSRule analysis
-  uses: Microsoft/ps-rule@master
+  uses: Microsoft/ps-rule@main
 ```
 
 ## Inputs
 
 ```yaml
 - name: Run PSRule analysis
-  uses: Microsoft/ps-rule@master
+  uses: Microsoft/ps-rule@main
   with:
     inputType: repository, inputPath              # Optional. Determines the type of input to use for PSRule.
     inputPath: string                             # Optional. The path PSRule will look for files to validate.
@@ -80,7 +80,7 @@ Options specified in `ps-rule.yaml` from this directory will be used unless over
 To use PSRule:
 
 1. See [Creating a workflow file](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file).
-2. Reference `Microsoft/ps-rule@master`.
+2. Reference `Microsoft/ps-rule@main`.
 For example:
 
 ```yaml
@@ -96,7 +96,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Run PSRule analysis
-      uses: Microsoft/ps-rule@master
+      uses: Microsoft/ps-rule@main
 ```
 
 3. Create rules within the `.ps-rule/` directory.
