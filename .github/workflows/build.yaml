@@ -19,7 +19,7 @@ jobs:
         outputPath: reports/ps-rule-results.xml
 
     - name: PSRule results
-      uses: actions/upload-artifact@v2.1.3
+      uses: actions/upload-artifact@v2.1.4
       if: always()
       with:
         name: PSRule-results
