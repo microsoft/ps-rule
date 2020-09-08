@@ -8,6 +8,15 @@ To learn about PSRule and how to write your own rules see [Getting started](http
 
 ## Usage
 
+To get the latest stable release use:
+
+```yaml
+- name: Run PSRule analysis
+  uses: Microsoft/ps-rule@v0.3.0
+```
+
+To get the latest bits use:
+
 ```yaml
 - name: Run PSRule analysis
   uses: Microsoft/ps-rule@main
