@@ -139,6 +139,7 @@ foreach ($m in $moduleNames) {
 
 Write-Host '';
 Write-Host "[info] Using Action: $Env:GITHUB_ACTION";
+Write-Host "[info] Using PWD: $PWD";
 Write-Host "[info] Using Path: $Path";
 Write-Host "[info] Using Source: $Source";
 Write-Host "[info] Using InputType: $InputType";
@@ -168,13 +169,10 @@ try {
 
     # repository
     if ($InputType -eq 'repository') {
-        $items = New-Object -TypeName System.Collections.ArrayList;
         WriteDebug 'Running ''Assert-PSRule'' with repository as input.';
-        $Null = $items.Add((Get-Item -Path $InputPath));
-        $Null = $items.AddRange((Get-ChildItem -Path $InputPath -File -Recurse));
         Write-Host '';
         Write-Host '---';
-        $items.ToArray() | Assert-PSRule -Option (New-PSRuleOption -TargetName 'FullName') @invokeParams;
+        Assert-PSRule @invokeParams -InputPath $InputPath -Format File;
     }
     # inputPath
     elseif ($InputType -eq 'inputPath') {

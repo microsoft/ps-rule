@@ -3,3 +3,7 @@
 output:
   culture:
   - en-US
+
+input:
+  pathIgnore:
+  - '*.md'
