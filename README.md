@@ -115,20 +115,13 @@ For example:
 # Example .ps-rule/GitHub.Community.Rule.ps1
 
 # Synopsis: Check for recommended community files
-Rule 'GitHub.Community' -Type 'System.IO.DirectoryInfo' {
-    $requiredFiles = @(
-        'README.md'
-        'LICENSE'
-        'CODE_OF_CONDUCT.md'
-        'CONTRIBUTING.md'
-        '.github/CODEOWNERS'
-        '.github/PULL_REQUEST_TEMPLATE.md'
-    )
-    Test-Path -Path $TargetObject.FullName;
-    for ($i = 0; $i -lt $requiredFiles.Length; $i++) {
-        $filePath = Join-Path -Path $TargetObject.FullName -ChildPath $requiredFiles[$i];
-        $Assert.Create((Test-Path -Path $filePath -PathType Leaf), "$($requiredFiles[$i]) does not exist");
-    }
+Rule 'GitHub.Community' -Type 'PSRule.Data.RepositoryInfo' {
+    $Assert.FilePath($TargetObject, 'FullName', @('LICENSE'));
+    $Assert.FilePath($TargetObject, 'FullName', @('CODE_OF_CONDUCT.md'));
+    $Assert.FilePath($TargetObject, 'FullName', @('CONTRIBUTING.md'));
+    $Assert.FilePath($TargetObject, 'FullName', @('README.md'));
+    $Assert.FilePath($TargetObject, 'FullName', @('.github/CODEOWNERS'));
+    $Assert.FilePath($TargetObject, 'FullName', @('.github/PULL_REQUEST_TEMPLATE.md'));
 }
 ```
 

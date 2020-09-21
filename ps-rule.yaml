@@ -7,3 +7,4 @@ output:
 input:
   pathIgnore:
   - '*.md'
+  - '.vscode/'
