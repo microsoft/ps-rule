@@ -22,6 +22,8 @@ To get the latest bits use:
   uses: Microsoft/ps-rule@main
 ```
 
+For a list of changes please see the [change log].
+
 ## Inputs
 
 ```yaml
@@ -151,3 +153,5 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 ## License
 
 This project is [licensed under the MIT License](LICENSE).
+
+[change log]: CHANGELOG.md

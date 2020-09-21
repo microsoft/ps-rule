@@ -10,7 +10,7 @@
 What's changed since v0.2.0:
 
 - General improvements:
-  - **Breaking change**: Updated `ps-rule-assert` task to use `File` input format for repository scans. [#33](https://github.com/microsoft/ps-rule/issues/33)
+  - **Breaking change**: Updated `ps-rule` action to use `File` input format for repository analysis. [#33](https://github.com/microsoft/ps-rule/issues/33)
     - The `Input.PathIgnore` option can be configured to exclude files.
     - Path specs included in `.gitignore` are also automatically excluded.
     - See [upgrade notes][upgrade-v0.3.0] for details on breaking change.
