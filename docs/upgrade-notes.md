@@ -5,6 +5,7 @@ This document contains notes to help upgrade from previous versions of the PSRul
 ## Upgrade to v0.3.0 from v0.2.x
 
 Follow these notes to upgrade from action version _v0.2.x_ to _v0.3.0_.
+For a list of upstream changes to the PSRule engine see [change log](https://github.com/microsoft/PSRule/blob/main/CHANGELOG.md#v0200).
 
 ## Repository analysis
 
@@ -53,7 +54,7 @@ This change provides a more efficient scan of files and allows exclusion of file
 Two breaking changes occurred as a result of this.
 
 1. The repository root uses the type `PSRule.Data.RepositoryInfo` instead of `System.IO.DirectoryInfo`.
-Rules that previously used `-Type 'System.IO.DirectoryInfo'` should now used `-Type 'PSRule.Data.RepositoryInfo'`.
+Rules that previously used `-Type 'System.IO.DirectoryInfo'` should now use `-Type 'PSRule.Data.RepositoryInfo'`.
 2. Each repository file now uses the type `PSRule.Data.InputFileInfo` instead of `System.IO.FileInfo`.
 Additionally, PSRule automatically uses the file extension for type binding.
 Rules that previously used `-Type 'System.IO.FileInfo'` should now use the file extension.
