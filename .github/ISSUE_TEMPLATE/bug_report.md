@@ -29,7 +29,7 @@ Capture any error messages and or run output.
 
 **Action version:**
 
-- Version: **[e.g. 0.1.0]**
+- Version: **[e.g. 0.4.0]**
 
 **Additional context**
 
