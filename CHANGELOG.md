@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Engineering:
+  - Updated to PSRule v0.21.0. [#41](https://github.com/microsoft/ps-rule/issues/41)
+    - See the [change log](https://github.com/microsoft/PSRule/blob/main/CHANGELOG.md#v0210)
 - Bug fixes:
   - Updated README example rule to use `PSRule.Data.RepositoryInfo` type filter. [#37](https://github.com/microsoft/ps-rule/issues/37)
 
