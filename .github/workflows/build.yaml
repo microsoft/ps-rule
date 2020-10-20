@@ -1,7 +1,8 @@
 # CI workflow for validating action
 name: Build
 on:
-  - pull_request
+- pull_request
+- push
 jobs:
   run:
     name: Analyze repository
