@@ -1,6 +1,16 @@
 # Change log
 
+See [upgrade notes][upgrade-notes] for helpful information when upgrading from previous versions.
+
+[upgrade-notes]: docs/upgrade-notes.md
+
 ## Unreleased
+
+What's changed since v0.4.0:
+
+- Engineering:
+  - Updated to PSRule v0.22.0. [#45](https://github.com/microsoft/ps-rule/issues/45)
+    - See the [change log](https://github.com/microsoft/PSRule/blob/main/CHANGELOG.md#v0220)
 
 ## v0.4.0
 
