@@ -16,12 +16,12 @@ jobs:
       uses: ./
       with:
         inputType: repository
-        outputFormat: NUnit3
-        outputPath: reports/ps-rule-results.xml
+        outputFormat: Markdown
+        outputPath: reports/report.md
 
     - name: PSRule results
       uses: actions/upload-artifact@v2.2.0
       if: always()
       with:
         name: PSRule-results
-        path: reports/ps-rule-results.xml
+        path: reports/report.md

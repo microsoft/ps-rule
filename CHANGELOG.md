@@ -8,6 +8,8 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 What's changed since v0.4.0:
 
+- General improvements:
+  - Added support for markdown output format. [#47](https://github.com/microsoft/ps-rule/issues/47)
 - Engineering:
   - Updated to PSRule v0.22.0. [#45](https://github.com/microsoft/ps-rule/issues/45)
     - See the [change log](https://github.com/microsoft/PSRule/blob/main/CHANGELOG.md#v0220)
