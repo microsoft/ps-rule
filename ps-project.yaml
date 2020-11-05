@@ -14,7 +14,7 @@ bugs:
   url: https://github.com/Microsoft/ps-rule/issues
 
 modules:
-  PSRule: ^0.21.0
+  PSRule: ^0.22.0
 
 tasks:
   clear:
