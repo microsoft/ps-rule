@@ -32,7 +32,7 @@ param (
 
     # The output format
     [Parameter(Mandatory = $False)]
-    [ValidateSet('None', 'Yaml', 'Json', 'NUnit3', 'Csv')]
+    [ValidateSet('None', 'Yaml', 'Json', 'NUnit3', 'Csv', 'Markdown')]
     [String]$OutputFormat = $Env:INPUT_OUTPUTFORMAT,
 
     # The path to store formatted output

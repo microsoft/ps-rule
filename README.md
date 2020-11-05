@@ -30,13 +30,13 @@ For a list of changes please see the [change log].
 - name: Run PSRule analysis
   uses: Microsoft/ps-rule@main
   with:
-    inputType: repository, inputPath              # Optional. Determines the type of input to use for PSRule.
-    inputPath: string                             # Optional. The path PSRule will look for files to validate.
-    modules: string                               # Optional. A comma separated list of modules to use for analysis.
-    source: string                                # Optional. A path containing rules to use for analysis.
-    outputFormat: None, Yaml, Json, NUnit3, Csv   # Optional. The format to use when writing results to disk.
-    outputPath: string                            # Optional. The file path to write results to.
-    path: string                                  # Optional. The working directory PSRule is run from.
+    inputType: repository, inputPath                        # Optional. Determines the type of input to use for PSRule.
+    inputPath: string                                       # Optional. The path PSRule will look for files to validate.
+    modules: string                                         # Optional. A comma separated list of modules to use for analysis.
+    source: string                                          # Optional. A path containing rules to use for analysis.
+    outputFormat: None, Yaml, Json, NUnit3, Csv, Markdown   # Optional. The format to use when writing results to disk.
+    outputPath: string                                      # Optional. The file path to write results to.
+    path: string                                            # Optional. The working directory PSRule is run from.
 ```
 
 ### `inputType`
@@ -72,7 +72,7 @@ Use this option to include rules that have not been packaged as a module.
 ### `outputFormat`
 
 The output format to write result to disk.
-Supported formats are `Yaml`, `Json`, `NUnit3`, `Csv`.
+Supported formats are `Yaml`, `Json`, `NUnit3`, `Csv`, `Markdown`.
 Defaults to `None`.
 
 ### `outputPath`
