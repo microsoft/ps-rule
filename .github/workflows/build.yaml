@@ -20,7 +20,7 @@ jobs:
         outputPath: reports/report.md
 
     - name: PSRule results
-      uses: actions/upload-artifact@v2.2.0
+      uses: actions/upload-artifact@v2.2.1
       if: always()
       with:
         name: PSRule-results
