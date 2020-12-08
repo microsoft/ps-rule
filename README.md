@@ -12,7 +12,7 @@ To get the latest stable release use:
 
 ```yaml
 - name: Run PSRule analysis
-  uses: Microsoft/ps-rule@v0.5.0
+  uses: Microsoft/ps-rule@v1.0.0
 ```
 
 To get the latest bits use:
@@ -104,7 +104,7 @@ jobs:
     steps:
 
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@main
 
     - name: Run PSRule analysis
       uses: Microsoft/ps-rule@main
