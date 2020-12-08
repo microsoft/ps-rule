@@ -1,9 +1,9 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
 
-ARG MODULE_VERSION=0.22.0
+ARG MODULE_VERSION=1.0.0
 
-FROM mcr.microsoft.com/powershell:7.0.3-alpine-3.10
+FROM mcr.microsoft.com/powershell:7.1.0-alpine-3.10
 SHELL ["pwsh", "-Command"]
 RUN $ProgressPreference = [System.Management.Automation.ActionPreference]::SilentlyContinue; \
     $Null = New-Item -Path /ps_modules/ -ItemType Directory -Force; \
