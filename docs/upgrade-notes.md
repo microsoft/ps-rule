@@ -5,7 +5,7 @@ This document contains notes to help upgrade from previous versions of the PSRul
 ## Upgrade to v0.3.0 from v0.2.x
 
 Follow these notes to upgrade from action version _v0.2.x_ to _v0.3.0_.
-For a list of upstream changes to the PSRule engine see [change log](https://github.com/microsoft/PSRule/blob/main/CHANGELOG.md#v0200).
+For a list of upstream changes to the PSRule engine see [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v0.md#v0200).
 
 ## Repository analysis
 
