@@ -41,6 +41,11 @@ inputs:
     default: ''
     required: false
 
+  prerelease:
+    description: 'Determine if a pre-release module version is installed.'
+    default: 'false'
+    required: false
+
 runs:
   using: 'docker'
   image: 'Dockerfile'

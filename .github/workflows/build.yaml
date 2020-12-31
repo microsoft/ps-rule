@@ -18,6 +18,8 @@ jobs:
         inputType: repository
         outputFormat: Markdown
         outputPath: reports/report.md
+        modules: PSRule.Rules.MSFT.OSS
+        prerelease: true
 
     - name: PSRule results
       uses: actions/upload-artifact@v2.2.1

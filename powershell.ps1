@@ -37,7 +37,11 @@ param (
 
     # The path to store formatted output
     [Parameter(Mandatory = $False)]
-    [String]$OutputPath = $Env:INPUT_OUTPUTPATH
+    [String]$OutputPath = $Env:INPUT_OUTPUTPATH,
+
+    # Determine if a pre-release module version is installed.
+    [Parameter(Mandatory = $False)]
+    [String]$PreRelease = $Env:INPUT_PRERELEASE
 )
 
 $workspacePath = $Env:GITHUB_WORKSPACE;
@@ -115,6 +119,9 @@ if (![String]::IsNullOrEmpty($Modules)) {
 $moduleParams = @{
     Scope = 'CurrentUser'
     Force = $True
+}
+if ($PreRelease -eq 'true') {
+    $moduleParams['AllowPrerelease'] = $True;
 }
 
 # Install each module if not already installed
