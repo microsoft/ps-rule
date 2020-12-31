@@ -4,6 +4,13 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 [upgrade-notes]: upgrade-notes.md
 
+## Unreleased
+
+What's changed since v1.0.0:
+
+- General improvements:
+  - Added support for using pre-release modules. [#58](https://github.com/microsoft/ps-rule/issues/58)
+
 ## v1.0.0
 
 What's changed since v0.5.0:

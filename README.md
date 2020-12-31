@@ -37,6 +37,7 @@ For a list of changes please see the [change log].
     outputFormat: None, Yaml, Json, NUnit3, Csv, Markdown   # Optional. The format to use when writing results to disk.
     outputPath: string                                      # Optional. The file path to write results to.
     path: string                                            # Optional. The working directory PSRule is run from.
+    prerelease: boolean                                     # Optional. Determine if a pre-release module version is installed.
 ```
 
 ### `inputType`
@@ -59,8 +60,10 @@ Defaults to repository root.
 A comma separated list of modules to use for analysis.
 
 Modules are additional packages that can be installed from the PowerShell Gallery.
-PSRule will install the latest **stable** version from the PowerShell Gallery automatically.
-[Available modules](https://www.powershellgallery.com/packages?q=Tags:%22PSRule-rules%22).
+PSRule will install the latest **stable** version from the PowerShell Gallery automatically by default.
+[Available modules](https://www.powershellgallery.com/packages?q=Tags%3A%22PSRule-rules%22).
+
+To install pre-release module versions, use `prerelease: true`.
 
 ### `source`
 
@@ -85,6 +88,11 @@ The working directory PSRule is run from.
 Defaults to repository root.
 
 Options specified in `ps-rule.yaml` from this directory will be used unless overridden by inputs.
+
+### `prerelease`
+
+Determine if a pre-release module version is installed.
+Defaults to `false`.
 
 ## Using the action
 
