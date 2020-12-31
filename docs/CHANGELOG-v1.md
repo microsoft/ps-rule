@@ -10,6 +10,9 @@ What's changed since v1.0.0:
 
 - General improvements:
   - Added support for using pre-release modules. [#58](https://github.com/microsoft/ps-rule/issues/58)
+- Engineering:
+  - Updated to PSRule v1.0.1. [#57](https://github.com/microsoft/ps-rule/issues/57)
+    - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v1.md#v101)
 
 ## v1.0.0
 
