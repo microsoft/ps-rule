@@ -1,15 +1,16 @@
 ---
 name: Bug report
 about: Report errors or an unexpected issue
+labels: bug
 ---
 
 **Description of the issue**
 
-A clear and concise description of what the bug is.
+<!-- A clear and concise description of what the bug is. -->
 
 **Expected behaviour**
 
-A clear and concise description of what you expected to happen.
+<!-- A clear and concise description of what you expected to happen. -->
 
 **To Reproduce**
 
@@ -21,7 +22,7 @@ Steps to reproduce the issue:
 
 **Error output**
 
-Capture any error messages and or run output.
+<!-- Capture any error messages and or run output. -->
 
 ```text
 
@@ -29,8 +30,8 @@ Capture any error messages and or run output.
 
 **Action version:**
 
-- Version: **[e.g. 0.4.0]**
+- Version: **[e.g. 1.0.0]**
 
 **Additional context**
 
-Add any other context about the problem here.
+<!-- Add any other context about the problem here. -->
