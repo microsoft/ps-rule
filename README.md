@@ -91,8 +91,10 @@ Options specified in `ps-rule.yaml` from this directory will be used unless over
 
 ### `prerelease`
 
-Determine if a pre-release module version is installed.
-Defaults to `false`.
+Determine if a pre-release rules module version is installed.
+When set to `true` the latest pre-release or stable module version is installed.
+
+If this input is not configured, invalid, or set to `false` only stable module versions will be installed.
 
 ## Using the action
 
