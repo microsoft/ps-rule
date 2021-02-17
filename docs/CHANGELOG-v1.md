@@ -6,6 +6,13 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
+What's changed since v1.1.0:
+
+- Engineering:
+  - Bump PSRule dependency to v1.0.3. [#67](https://github.com/microsoft/ps-rule/issues/67)
+    - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v1.md#v103)
+  - Bump PowerShell base image to 7.1.2-alpine-3.12. [#68](https://github.com/microsoft/ps-rule/issues/68)
+
 ## v1.1.0
 
 What's changed since v1.0.0:
@@ -13,7 +20,7 @@ What's changed since v1.0.0:
 - General improvements:
   - Added support for using pre-release modules. [#58](https://github.com/microsoft/ps-rule/issues/58)
 - Engineering:
-  - Updated to PSRule v1.0.1. [#57](https://github.com/microsoft/ps-rule/issues/57)
+  - Bump PSRule dependency to v1.0.1. [#57](https://github.com/microsoft/ps-rule/issues/57)
     - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v1.md#v101)
 
 ## v1.0.0
@@ -21,6 +28,6 @@ What's changed since v1.0.0:
 What's changed since v0.5.0:
 
 - Engineering:
-  - Updated to PSRule v1.0.0. [#52](https://github.com/microsoft/ps-rule/issues/52)
+  - Bump PSRule dependency to v1.0.0. [#52](https://github.com/microsoft/ps-rule/issues/52)
     - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v1.md#v100)
-  - Updated docker image to PowerShell version v7.1. [#53](https://github.com/microsoft/ps-rule/issues/53)
+  - Bump PowerShell base image to 7.1.0-alpine-3.10. [#53](https://github.com/microsoft/ps-rule/issues/53)
