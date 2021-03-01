@@ -30,6 +30,10 @@ param (
     [Parameter(Mandatory = $False)]
     [String]$Modules = $Env:INPUT_MODULES,
 
+    # A baseline to use
+    [Parameter(Mandatory = $False)]
+    [String]$Baseline = $env:INPUT_BASELINE,
+
     # The output format
     [Parameter(Mandatory = $False)]
     [ValidateSet('None', 'Yaml', 'Json', 'NUnit3', 'Csv', 'Markdown')]
@@ -149,6 +153,7 @@ Write-Host "[info] Using Action: $Env:GITHUB_ACTION";
 Write-Host "[info] Using PWD: $PWD";
 Write-Host "[info] Using Path: $Path";
 Write-Host "[info] Using Source: $Source";
+Write-Host "[info] Using Baseline: $Baseline";
 Write-Host "[info] Using InputType: $InputType";
 Write-Host "[info] Using InputPath: $InputPath";
 Write-Host "[info] Using OutputFormat: $OutputFormat";
@@ -163,6 +168,10 @@ try {
     }
     WriteDebug "Preparing command-line:";
     WriteDebug ([String]::Concat('-Path ''', $Source, ''''));
+    if (![String]::IsNullOrEmpty($Baseline)) {
+        $invokeParams['Baseline'] = $Baseline;
+        WriteDebug ([String]::Concat('-Baseline ''', $Baseline, ''''));
+    }
     if (![String]::IsNullOrEmpty($Modules)) {
         $moduleNames = $Modules.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries);
         $invokeParams['Module'] = $moduleNames;

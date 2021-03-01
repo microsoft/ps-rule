@@ -34,6 +34,7 @@ For a list of changes please see the [change log].
     inputPath: string                                       # Optional. The path PSRule will look for files to validate.
     modules: string                                         # Optional. A comma separated list of modules to use for analysis.
     source: string                                          # Optional. A path containing rules to use for analysis.
+    baseline: string                                        # Optional. The name of a PSRule baseline to use.
     outputFormat: None, Yaml, Json, NUnit3, Csv, Markdown   # Optional. The format to use when writing results to disk.
     outputPath: string                                      # Optional. The file path to write results to.
     path: string                                            # Optional. The working directory PSRule is run from.
@@ -71,6 +72,13 @@ An path containing rules to use for analysis.
 Defaults to `.ps-rule/`.
 
 Use this option to include rules that have not been packaged as a module.
+
+### `baseline`
+
+The name of a PSRule baseline to use.
+Baselines can be used from modules or specified in a separate file.
+To use a baseline included in a module use `modules:` with `baseline:`.
+To use a baseline specified in a separate file use `source:` with `baseline:`.
 
 ### `outputFormat`
 
