@@ -3,7 +3,7 @@
 
 ARG MODULE_VERSION=1.2.0
 
-FROM mcr.microsoft.com/powershell:7.1.3-alpine-3.12-20210316
+FROM mcr.microsoft.com/powershell:7.1.3-alpine-3.12-20210414
 SHELL ["pwsh", "-Command"]
 RUN $ProgressPreference = [System.Management.Automation.ActionPreference]::SilentlyContinue; \
     $Null = New-Item -Path /ps_modules/ -ItemType Directory -Force; \
