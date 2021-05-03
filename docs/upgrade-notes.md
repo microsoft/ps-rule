@@ -7,7 +7,7 @@ This document contains notes to help upgrade from previous versions of the PSRul
 Follow these notes to upgrade from action version _v0.2.x_ to _v0.3.0_.
 For a list of upstream changes to the PSRule engine see [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v0.md#v0200).
 
-## Repository analysis
+### Repository analysis
 
 Previously in _v0.2.0_ or prior using `inputType: repository` would:
 
