@@ -1,7 +1,7 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
 
-ARG MODULE_VERSION=1.3.0
+ARG MODULE_VERSION=1.4.0
 
 FROM mcr.microsoft.com/powershell:7.1.3-alpine-3.12-20210603
 SHELL ["pwsh", "-Command"]
