@@ -132,23 +132,39 @@ if ($PreRelease -eq 'true') {
 foreach ($m in $moduleNames) {
     $m = $m.Trim();
     Write-Host "> Checking module: $m";
-    if ($Null -eq (Get-InstalledModule -Name $m -ErrorAction Ignore)) {
-        Write-Host '  - Installing module';
-        $Null = Install-Module -Name $m @moduleParams -AllowClobber;
+    try {
+        if ($Null -eq (Get-InstalledModule -Name $m -ErrorAction Ignore)) {
+            Write-Host '  - Installing module';
+            $Null = Install-Module -Name $m @moduleParams -AllowClobber -ErrorAction Stop;
+        }
+        else {
+            Write-Host '  - Already installed';
+        }
+        # Check
+        if ($Null -eq (Get-InstalledModule -Name $m)) {
+            Write-Host "  - Failed to install";
+        }
+        else {
+            Write-Host "  - Using version: $((Get-InstalledModule -Name $m).Version)";
+        }
     }
-    else {
-        Write-Host '  - Already installed';
-    }
-    # Check
-    if ($Null -eq (Get-InstalledModule -Name $m)) {
-        Write-Host "  - Failed to install";
-    }
-    else {
-        Write-Host "  - Using version: $((Get-InstalledModule -Name $m).Version)";
+    catch {
+        Write-Host "::error::An error occured installing a dependency module '$m'.";
+        $Host.SetShouldExit(1);
     }
 }
 
+try {
+    $Null = Import-Module PSRule -ErrorAction Stop;
+    $version = (Get-InstalledModule PSRule).Version;
+}
+catch {
+    Write-Host "::error::An error occured importing module 'PSRule'.";
+    $Host.SetShouldExit(1);
+}
+
 Write-Host '';
+Write-Host "[info] Using Version: $version";
 Write-Host "[info] Using Action: $Env:GITHUB_ACTION";
 Write-Host "[info] Using PWD: $PWD";
 Write-Host "[info] Using Path: $Path";
