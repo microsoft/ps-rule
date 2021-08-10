@@ -6,6 +6,11 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
+- Engineering:
+  - Bump PSRule dependency to v1.6.0. [#106](https://github.com/microsoft/ps-rule/issues/106)
+    - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v1.md#v160)
+  - Bump PowerShell base image to 7.1.3-alpine-3.12-20210803. [#105](https://github.com/microsoft/ps-rule/pull/105)
+
 ## v1.6.0
 
 What's changed since v1.5.0:
