@@ -31,6 +31,11 @@ inputs:
     default: ''
     required: false
 
+  conventions:
+    description: 'A comma separated list of conventions to use.'
+    default: ''
+    required: false
+
   outputFormat:
     description: 'The format to use when writing results to disk. When set to None results are not written to disk.'
     default: 'None'

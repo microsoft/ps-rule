@@ -34,6 +34,10 @@ param (
     [Parameter(Mandatory = $False)]
     [String]$Baseline = $env:INPUT_BASELINE,
 
+    # The conventions to use
+    [Parameter(Mandatory = $False)]
+    [String]$Conventions = $Env:INPUT_CONVENTIONS,
+
     # The output format
     [Parameter(Mandatory = $False)]
     [ValidateSet('None', 'Yaml', 'Json', 'NUnit3', 'Csv', 'Markdown')]
@@ -86,6 +90,16 @@ if ([String]::IsNullOrEmpty($Source)) {
 }
 else {
     $Source = Join-Path -Path $Path -ChildPath $Source;
+}
+
+# Set conventions
+if (![String]::IsNullOrEmpty($Conventions)) {
+    $Conventions = @($Conventions.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries) | ForEach-Object {
+        $_.Trim();
+    });
+}
+else {
+    $Conventions = @();
 }
 
 function WriteDebug {
@@ -170,6 +184,7 @@ Write-Host "[info] Using PWD: $PWD";
 Write-Host "[info] Using Path: $Path";
 Write-Host "[info] Using Source: $Source";
 Write-Host "[info] Using Baseline: $Baseline";
+Write-Host "[info] Using Conventions: $Conventions";
 Write-Host "[info] Using InputType: $InputType";
 Write-Host "[info] Using InputPath: $InputPath";
 Write-Host "[info] Using OutputFormat: $OutputFormat";
@@ -187,6 +202,10 @@ try {
     if (![String]::IsNullOrEmpty($Baseline)) {
         $invokeParams['Baseline'] = $Baseline;
         WriteDebug ([String]::Concat('-Baseline ''', $Baseline, ''''));
+    }
+    if ($Conventions.Length -gt 0) {
+        $invokeParams['Convention'] = $Conventions;
+        WriteDebug ([String]::Concat('-Convention ', [String]::Join(', ', $Conventions)));
     }
     if (![String]::IsNullOrEmpty($Modules)) {
         $moduleNames = $Modules.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries);

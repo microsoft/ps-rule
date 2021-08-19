@@ -35,6 +35,7 @@ For a list of changes please see the [change log].
     modules: string                                         # Optional. A comma separated list of modules to use for analysis.
     source: string                                          # Optional. A path containing rules to use for analysis.
     baseline: string                                        # Optional. The name of a PSRule baseline to use.
+    conventions: string                                     # Optional. A comma separated list of conventions to use.
     outputFormat: None, Yaml, Json, NUnit3, Csv, Markdown   # Optional. The format to use when writing results to disk.
     outputPath: string                                      # Optional. The file path to write results to.
     path: string                                            # Optional. The working directory PSRule is run from.
@@ -77,8 +78,19 @@ Use this option to include rules that have not been packaged as a module.
 
 The name of a PSRule baseline to use.
 Baselines can be used from modules or specified in a separate file.
-To use a baseline included in a module use `modules:` with `baseline:`.
-To use a baseline specified in a separate file use `source:` with `baseline:`.
+
+- To use a baseline included in a module use `modules:` with `baseline:`.
+- To use a baseline specified in a separate file use `source:` with `baseline:`.
+
+### `conventions`
+
+A comma separated list of conventions to use.
+Conventions can be used from modules or specified in a separate file.
+
+- To use a convention included in a module use `modules:` with `conventions:`.
+- To use a convention specified in a separate file use `source:` with `conventions:`.
+
+For example: `conventions: Monitor.LogAnalytics.Import`
 
 ### `outputFormat`
 
