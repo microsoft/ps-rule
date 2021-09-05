@@ -6,10 +6,15 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
+What's changed since v1.7.0:
+
 - General improvements:
   - Added support for conventions. [#109](https://github.com/microsoft/ps-rule/issues/109)
     - Specify one or more conventions by using `conventions: '<convention1>,<convention2>'`.
     - Conventions can be included from individual files or modules using `source:` and `modules:`.
+- Engineering:
+  - Bump PSRule dependency to v1.7.0. [#111](https://github.com/microsoft/ps-rule/issues/111)
+    - See the [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v1.md#v170)
 
 ## v1.7.0
 
