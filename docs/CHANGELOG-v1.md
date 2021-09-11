@@ -6,6 +6,8 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
+## v1.8.1
+
 What's changed since v1.8.0:
 
 - Engineering:
