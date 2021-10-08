@@ -12,7 +12,7 @@ To get the latest stable release use:
 
 ```yaml
 - name: Run PSRule analysis
-  uses: Microsoft/ps-rule@v1.8.1
+  uses: Microsoft/ps-rule@v1.9.0
 ```
 
 To get the latest bits use:
