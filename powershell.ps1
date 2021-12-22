@@ -130,6 +130,13 @@ else {
     }
 }
 
+# Look for existing modules
+$installed = @(Get-InstalledModule)
+foreach ($m in $installed) {
+    Write-Host "[info] Using existing module $($m.Name): $($m.Version)";
+}
+Write-Host '';
+
 $moduleNames = @()
 if (![String]::IsNullOrEmpty($Modules)) {
     $moduleNames = $Modules.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries);
@@ -170,7 +177,7 @@ foreach ($m in $moduleNames) {
 
 try {
     $Null = Import-Module PSRule -ErrorAction Stop;
-    $version = (Get-InstalledModule PSRule).Version;
+    $version = (Get-Module PSRule).Version;
 }
 catch {
     Write-Host "::error::An error occured importing module 'PSRule'.";
@@ -180,6 +187,7 @@ catch {
 Write-Host '';
 Write-Host "[info] Using Version: $version";
 Write-Host "[info] Using Action: $Env:GITHUB_ACTION";
+Write-Host "[info] Using Workspace: $workspacePath"
 Write-Host "[info] Using PWD: $PWD";
 Write-Host "[info] Using Path: $Path";
 Write-Host "[info] Using Source: $Source";
