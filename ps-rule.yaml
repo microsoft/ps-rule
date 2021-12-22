@@ -6,7 +6,7 @@
 # https://microsoft.github.io/PSRule/
 
 requires:
-  PSRule: '>=1.9.0'
+  PSRule: '>=1.10.0'
 
 output:
   culture:
