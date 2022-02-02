@@ -6,6 +6,19 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
+What's changed since v1.12.0:
+
+- New features:
+  - Added support for using a specific version of PSRule. [#132](https://github.com/microsoft/ps-rule/issues/132)
+    - To install a specific version set the `version` parameter.
+    - By default, the latest stable version of PSRule is used.
+  - Added support for outputting analysis results as SARIF. [#136](https://github.com/microsoft/ps-rule/issues/136)
+    - To use the SARIF output format set the `outputFormat` parameter to `Sarif`.
+    - Currently a pre-release version of PSRule must be used.
+      To configure this:
+      - Set the `prerelease` parameter to `true` to include pre-release versions.
+      - Set the `version` parameter to `2.0.0-B2201161` or newer version.
+
 ## v1.12.0
 
 What's changed since v1.11.0:

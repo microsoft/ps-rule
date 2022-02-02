@@ -15,4 +15,5 @@ output:
 input:
   pathIgnore:
   - '*.md'
+  - '*.json'
   - '.vscode/'

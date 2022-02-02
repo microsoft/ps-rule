@@ -1,3 +1,6 @@
+#
+# GitHub Action manifest for PSRule
+#
 name: 'PSRule'
 description: 'Run rules in a GitHub repository.'
 author: 'Microsoft'
@@ -56,6 +59,16 @@ inputs:
     default: 'false'
     required: false
 
+  version:
+    description: 'The specific version of PSRule to use.'
+    default: ''
+    required: false
+
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'composite'
+  steps:
+  - name: 'Analysis'
+    shell: pwsh
+    working-directory: ${{ github.workspace }}
+    run: |-
+      ${{ github.action_path }}/powershell.ps1 -InputType '${{ inputs.inputType }}' -InputPath '${{ inputs.inputPath }}' -Modules '${{ inputs.modules }}' -Source '${{ inputs.source }}' -Baseline '${{ inputs.baseline }}' -Conventions '${{ inputs.conventions }}' -OutputFormat '${{ inputs.outputFormat }}' -OutputPath '${{ inputs.outputPath }}' -Path '${{ inputs.path }}' -PreRelease '${{ inputs.prerelease }}' -Version '${{ inputs.version }}'
