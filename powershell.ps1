@@ -40,7 +40,7 @@ param (
 
     # The output format
     [Parameter(Mandatory = $False)]
-    [ValidateSet('None', 'Yaml', 'Json', 'NUnit3', 'Csv', 'Markdown')]
+    [ValidateSet('None', 'Yaml', 'Json', 'NUnit3', 'Csv', 'Markdown', 'Sarif')]
     [String]$OutputFormat = $Env:INPUT_OUTPUTFORMAT,
 
     # The path to store formatted output
@@ -49,7 +49,11 @@ param (
 
     # Determine if a pre-release module version is installed.
     [Parameter(Mandatory = $False)]
-    [String]$PreRelease = $Env:INPUT_PRERELEASE
+    [String]$PreRelease = $Env:INPUT_PRERELEASE,
+
+    # The specific version of PSRule to use.
+    [Parameter(Mandatory = $False)]
+    [String]$Version = $Env:INPUT_VERSION
 )
 
 $workspacePath = $Env:GITHUB_WORKSPACE;
@@ -115,28 +119,33 @@ function WriteDebug {
     }
 }
 
-# Setup paths for importing modules
-$modulesPath = '/ps_modules/';
-if ((Get-Variable -Name IsMacOS -ErrorAction Ignore) -or (Get-Variable -Name IsLinux -ErrorAction Ignore)) {
-    $moduleSearchPaths = $Env:PSModulePath.Split(':', [System.StringSplitOptions]::RemoveEmptyEntries);
-    if ($modulesPath -notin $moduleSearchPaths) {
-        $Env:PSModulePath += [String]::Concat($Env:PSModulePath, ':', $modulesPath);
-    }
+#
+# Check and install modules
+#
+$dependencyFile = Join-Path -Path $Env:GITHUB_ACTION_PATH -ChildPath 'modules.json';
+$latestVersion = (Get-Content -Path $dependencyFile -Raw | ConvertFrom-Json -AsHashtable -Depth 5).dependencies.PSRule.version;
+$checkParams = @{
+    RequiredVersion = $latestVersion
 }
-else {
-    $moduleSearchPaths = $Env:PSModulePath.Split(';', [System.StringSplitOptions]::RemoveEmptyEntries);
-    if ($modulesPath -notin $moduleSearchPaths) {
-        $Env:PSModulePath += [String]::Concat($Env:PSModulePath, ';', $modulesPath);
+if (![String]::IsNullOrEmpty($Version)) {
+    $checkParams['RequiredVersion'] = $Version;
+    if ($PreRelease -eq 'true') {
+        $checkParams['AllowPrerelease'] = $True;
     }
 }
 
-# Look for existing modules
-$installed = @(Get-InstalledModule)
+# Look for existing versions of PSRule
+$installed = @(Get-InstalledModule -Name PSRule @checkParams -ErrorAction Ignore)
+if ($installed.Length -eq 0) {
+    Write-Host "[info] Installing PSRule: $($checkParams.RequiredVersion)";
+    $Null = Install-Module -Name PSRule @checkParams -Scope CurrentUser -Force;
+}
 foreach ($m in $installed) {
     Write-Host "[info] Using existing module $($m.Name): $($m.Version)";
 }
-Write-Host '';
 
+# Look for existing modules
+Write-Host '';
 $moduleNames = @()
 if (![String]::IsNullOrEmpty($Modules)) {
     $moduleNames = $Modules.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries);
@@ -176,7 +185,7 @@ foreach ($m in $moduleNames) {
 }
 
 try {
-    $Null = Import-Module PSRule -ErrorAction Stop;
+    $Null = Import-Module PSRule @checkParams -ErrorAction Stop;
     $version = (Get-Module PSRule).Version;
 }
 catch {
@@ -184,6 +193,9 @@ catch {
     $Host.SetShouldExit(1);
 }
 
+#
+# Run assert pipeline
+#
 Write-Host '';
 Write-Host "[info] Using Version: $version";
 Write-Host "[info] Using Action: $Env:GITHUB_ACTION";

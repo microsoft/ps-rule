@@ -12,14 +12,14 @@ To get the latest stable release use:
 
 ```yaml
 - name: Run PSRule analysis
-  uses: Microsoft/ps-rule@v1.12.0
+  uses: microsoft/ps-rule@v1.12.0
 ```
 
 To get the latest bits use:
 
 ```yaml
 - name: Run PSRule analysis
-  uses: Microsoft/ps-rule@main
+  uses: microsoft/ps-rule@main
 ```
 
 For a list of changes please see the [change log].
@@ -28,18 +28,19 @@ For a list of changes please see the [change log].
 
 ```yaml
 - name: Run PSRule analysis
-  uses: Microsoft/ps-rule@main
+  uses: microsoft/ps-rule@main
   with:
-    inputType: repository, inputPath                        # Optional. Determines the type of input to use for PSRule.
-    inputPath: string                                       # Optional. The path PSRule will look for files to validate.
-    modules: string                                         # Optional. A comma separated list of modules to use for analysis.
-    source: string                                          # Optional. A path containing rules to use for analysis.
-    baseline: string                                        # Optional. The name of a PSRule baseline to use.
-    conventions: string                                     # Optional. A comma separated list of conventions to use.
-    outputFormat: None, Yaml, Json, NUnit3, Csv, Markdown   # Optional. The format to use when writing results to disk.
-    outputPath: string                                      # Optional. The file path to write results to.
-    path: string                                            # Optional. The working directory PSRule is run from.
-    prerelease: boolean                                     # Optional. Determine if a pre-release module version is installed.
+    inputType: repository, inputPath                             # Optional. Determines the type of input to use for PSRule.
+    inputPath: string                                            # Optional. The path PSRule will look for files to validate.
+    modules: string                                              # Optional. A comma separated list of modules to use for analysis.
+    source: string                                               # Optional. A path containing rules to use for analysis.
+    baseline: string                                             # Optional. The name of a PSRule baseline to use.
+    conventions: string                                          # Optional. A comma separated list of conventions to use.
+    outputFormat: None, Yaml, Json, NUnit3, Csv, Markdown, Sarif # Optional. The format to use when writing results to disk.
+    outputPath: string                                           # Optional. The file path to write results to.
+    path: string                                                 # Optional. The working directory PSRule is run from.
+    prerelease: boolean                                          # Optional. Determine if a pre-release module version is installed.
+    version: string                                              # Optional. The specific version of PSRule to use.
 ```
 
 ### `inputType`
@@ -95,7 +96,7 @@ For example: `conventions: Monitor.LogAnalytics.Import`
 ### `outputFormat`
 
 The output format to write result to disk.
-Supported formats are `Yaml`, `Json`, `NUnit3`, `Csv`, `Markdown`.
+Supported formats are `Yaml`, `Json`, `NUnit3`, `Csv`, `Markdown`, `Sarif`.
 Defaults to `None`.
 
 ### `outputPath`
@@ -111,17 +112,27 @@ Options specified in `ps-rule.yaml` from this directory will be used unless over
 
 ### `prerelease`
 
-Determine if a pre-release rules module version is installed.
+Determine if a pre-release module versions are installed.
 When set to `true` the latest pre-release or stable module version is installed.
 
 If this input is not configured, invalid, or set to `false` only stable module versions will be installed.
+
+### `version`
+
+The specific version of PSRule to use.
+By default, the latest stable version of PSRule will be used.
+When set:
+
+- The specific version of PSRule will be installed and imported for use.
+- If a pre-release version is specified, `prerelease: true` must also be specified.
+- If the version is not found, an error will be thrown.
 
 ## Using the action
 
 To use PSRule:
 
 1. See [Creating a workflow file](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file).
-2. Reference `Microsoft/ps-rule@main`.
+2. Reference `microsoft/ps-rule@v1.12.0`.
 For example:
 
 ```yaml
@@ -134,10 +145,10 @@ jobs:
     steps:
 
     - name: Checkout
-      uses: actions/checkout@main
+      uses: actions/checkout@v2.4.0
 
     - name: Run PSRule analysis
-      uses: Microsoft/ps-rule@main
+      uses: microsoft/ps-rule@v1.12.0
 ```
 
 3. Create rules within the `.ps-rule/` directory.
