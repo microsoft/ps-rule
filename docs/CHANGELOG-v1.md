@@ -18,6 +18,8 @@ What's changed since v1.12.0:
       To configure this:
       - Set the `prerelease` parameter to `true` to include pre-release versions.
       - Set the `version` parameter to `2.0.0-B2201161` or newer version.
+- Bug fixes:
+  - Fixed import of pre-release version. [#138](https://github.com/microsoft/ps-rule/issues/138)
 
 ## v1.12.0
 

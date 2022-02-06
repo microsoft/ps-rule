@@ -179,17 +179,18 @@ foreach ($m in $moduleNames) {
         }
     }
     catch {
-        Write-Host "::error::An error occured installing a dependency module '$m'.";
+        Write-Host "::error::An error occurred installing a dependency module '$m'. $($_.Exception.Message)";
         $Host.SetShouldExit(1);
     }
 }
 
 try {
+    $checkParams = @{ RequiredVersion = $checkParams.RequiredVersion.Split('-')[0] }
     $Null = Import-Module PSRule @checkParams -ErrorAction Stop;
     $version = (Get-Module PSRule).Version;
 }
 catch {
-    Write-Host "::error::An error occured importing module 'PSRule'.";
+    Write-Host "::error::An error occurred importing module 'PSRule'. $($_.Exception.Message)";
     $Host.SetShouldExit(1);
 }
 
