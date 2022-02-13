@@ -254,6 +254,10 @@ try {
         Assert-PSRule @invokeParams -InputPath $InputPath;
     }
 }
+catch [PSRule.Pipeline.RuleException] {
+    Write-Host "::error::Rule exception: $($_.Exception.Message)";
+    $Host.SetShouldExit(1);
+}
 catch {
     Write-Host "::error::One or more assertions failed.";
     $Host.SetShouldExit(1);
