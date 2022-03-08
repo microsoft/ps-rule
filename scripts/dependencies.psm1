@@ -63,6 +63,7 @@ function CheckVersion {
     [OutputType([System.Collections.Specialized.OrderedDictionary])]
     param (
         [Parameter(Mandatory = $True)]
+        [AllowNull()]
         [Hashtable]$InputObject,
 
         [Parameter(Mandatory = $True)]
@@ -86,6 +87,9 @@ function CheckVersion {
     }
     process {
         $dependencies = [Ordered]@{ };
+        if ($Null -eq $InputObject) {
+            return $dependencies;
+        }
         $InputObject.GetEnumerator() | Sort-Object -Property Name | ForEach-Object {
             $dependencies[$_.Name] = $_.Value
         }
