@@ -18,10 +18,13 @@ What's changed since v1.12.0:
       To configure this:
       - Set the `prerelease` parameter to `true` to include pre-release versions.
       - Set the `version` parameter to `2.0.0-B2201161` or newer version.
-- Bug fixes:
-  - Fixed import of pre-release version. [#138](https://github.com/microsoft/ps-rule/issues/138)
 - General improvements:
   - Exposed more rule error output in CI. [#140](https://github.com/microsoft/ps-rule/issues/140)
+- Engineering:
+  - Bump PSRule dependency to v1.11.1. [#147](https://github.com/microsoft/ps-rule/pull/147)
+    - See the [change log](https://microsoft.github.io/PSRule/latest/CHANGELOG-v1/#v1111)
+- Bug fixes:
+  - Fixed import of pre-release version. [#138](https://github.com/microsoft/ps-rule/issues/138)
 
 ## v1.12.0
 
