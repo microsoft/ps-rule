@@ -18,11 +18,22 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    - name: Register repository
+      shell: pwsh
+      run: |-
+        $Null = New-Item -Path out/repo -Type Directory -Force;
+
+        Invoke-WebRequest -Uri 'https://www.powershellgallery.com/api/v2/package/PSRule/1.11.1' -OutFile out/repo/PSRule.1.11.1.nupkg;
+        Invoke-WebRequest -Uri 'https://www.powershellgallery.com/api/v2/package/PSRule.Rules.MSFT.OSS/1.0.1' -OutFile out/repo/PSRule.Rules.MSFT.OSS.1.0.1.nupkg;
+        Save-Module -Name PSRule.Rules.MSFT.OSS -Repository PSGallery -Path out/repo/;
+        Register-PSRepository -SourceLocation out/repo -Name Local -InstallationPolicy Trusted;
+
     - name: Run PSRule v1
       uses: ./
       with:
         inputType: repository
         modules: PSRule.Rules.MSFT.OSS
+        repository: Local
 
     - name: Run PSRule v2
       uses: ./
@@ -30,7 +41,13 @@ jobs:
         inputType: repository
         modules: PSRule.Rules.MSFT.OSS
         prerelease: true
-        version: '2.0.0-B2202017'
+        version: '2.0.0-B2203033'
+
+    - name: Unregister repository
+      shell: pwsh
+      if: always()
+      run: |-
+        Unregister-PSRepository -Name Local -ErrorAction Ignore;
 
   run:
     name: Analyze repository

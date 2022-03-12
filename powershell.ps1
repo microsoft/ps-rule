@@ -51,6 +51,9 @@ param (
     [Parameter(Mandatory = $False)]
     [String]$PreRelease = $Env:INPUT_PRERELEASE,
 
+    # The name of the PowerShell repository where PSRule modules are installed from.
+    [String]$Repository = $Env:INPUT_REPOSITORY,
+
     # The specific version of PSRule to use.
     [Parameter(Mandatory = $False)]
     [String]$Version = $Env:INPUT_VERSION
@@ -106,6 +109,11 @@ else {
     $Conventions = @();
 }
 
+# Set repository
+if ([String]::IsNullOrEmpty($Repository)) {
+    $Repository = 'PSGallery'
+}
+
 function WriteDebug {
     [CmdletBinding()]
     param (
@@ -135,10 +143,11 @@ if (![String]::IsNullOrEmpty($Version)) {
 }
 
 # Look for existing versions of PSRule
+Write-Host "[info] Using repository: $Repository";
 $installed = @(Get-InstalledModule -Name PSRule @checkParams -ErrorAction Ignore)
 if ($installed.Length -eq 0) {
     Write-Host "[info] Installing PSRule: $($checkParams.RequiredVersion)";
-    $Null = Install-Module -Name PSRule @checkParams -Scope CurrentUser -Force;
+    $Null = Install-Module -Repository $Repository -Name PSRule @checkParams -Scope CurrentUser -Force;
 }
 foreach ($m in $installed) {
     Write-Host "[info] Using existing module $($m.Name): $($m.Version)";
@@ -165,7 +174,7 @@ foreach ($m in $moduleNames) {
     try {
         if ($Null -eq (Get-InstalledModule -Name $m -ErrorAction Ignore)) {
             Write-Host '  - Installing module';
-            $Null = Install-Module -Name $m @moduleParams -AllowClobber -ErrorAction Stop;
+            $Null = Install-Module -Repository $Repository -Name $m @moduleParams -AllowClobber -ErrorAction Stop;
         }
         else {
             Write-Host '  - Already installed';

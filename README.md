@@ -4,7 +4,9 @@ Validate infrastructure as code (IaC) and DevOps repositories using rules.
 PSRule allows you to analyse a repository with pre-built rules or create your own.
 Analysis can be performed from input files or the repository structure.
 
-To learn about PSRule and how to write your own rules see [Getting started](https://github.com/microsoft/PSRule#getting-started).
+To learn about PSRule and how to write your own rules see [Getting started][1].
+
+  [1]: https://microsoft.github.io/PSRule/v2/quickstart/standalone-rule/
 
 ## Usage
 
@@ -22,7 +24,9 @@ To get the latest bits use:
   uses: microsoft/ps-rule@main
 ```
 
-For a list of changes please see the [change log].
+For a list of changes please see the [change log][2].
+
+  [2]: CHANGELOG.md
 
 ## Inputs
 
@@ -40,6 +44,7 @@ For a list of changes please see the [change log].
     outputPath: string                                           # Optional. The file path to write results to.
     path: string                                                 # Optional. The working directory PSRule is run from.
     prerelease: boolean                                          # Optional. Determine if a pre-release module version is installed.
+    repository: string                                           # Optional. The name of the PowerShell repository where PSRule modules are installed from.
     version: string                                              # Optional. The specific version of PSRule to use.
 ```
 
@@ -64,9 +69,11 @@ A comma separated list of modules to use for analysis.
 
 Modules are additional packages that can be installed from the PowerShell Gallery.
 PSRule will install the latest **stable** version from the PowerShell Gallery automatically by default.
-[Available modules](https://www.powershellgallery.com/packages?q=Tags%3A%22PSRule-rules%22).
+[Available modules][3].
 
 To install pre-release module versions, use `prerelease: true`.
+
+  [3]: https://www.powershellgallery.com/packages?q=Tags%3A%22PSRule-rules%22
 
 ### `source`
 
@@ -116,6 +123,24 @@ Determine if a pre-release module versions are installed.
 When set to `true` the latest pre-release or stable module version is installed.
 
 If this input is not configured, invalid, or set to `false` only stable module versions will be installed.
+
+### `repository`
+
+The name of the PowerShell repository where PSRule modules are installed from.
+By default this is the PowerShell Gallery.
+
+When configured, PowerShell modules are installed from this repository.
+Before calling the `ps-rule` action, register and authenticate to the repository if required.
+
+For example, to register a local repository use:
+
+```powershell
+Register-PSRepository -SourceLocation \\server\share -Name Local -InstallationPolicy Trusted;
+```
+
+For details PowerShell repositories see [Working with Private PowerShellGet Repositories][4].
+
+  [4]: https://docs.microsoft.com/powershell/scripting/gallery/how-to/working-with-local-psrepositories
 
 ### `version`
 
@@ -195,5 +220,3 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 ## License
 
 This project is [licensed under the MIT License](LICENSE).
-
-[change log]: CHANGELOG.md
