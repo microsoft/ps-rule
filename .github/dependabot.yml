@@ -17,13 +17,3 @@ updates:
     - "dependencies"
     reviewers:
     - "@microsoft/psrule"
-
-  # Maintain dependencies for Docker
-  - package-ecosystem: "docker"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    labels:
-    - "dependencies"
-    reviewers:
-    - "@microsoft/psrule"
