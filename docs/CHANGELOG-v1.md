@@ -28,6 +28,7 @@ What's changed since v1.12.0:
     - See the [change log](https://microsoft.github.io/PSRule/latest/CHANGELOG-v1/#v1111)
 - Bug fixes:
   - Fixed import of pre-release version. [#138](https://github.com/microsoft/ps-rule/issues/138)
+  - Fixed path issue for running out of repo. [#150](https://github.com/microsoft/ps-rule/issues/150)
 
 ## v1.12.0
 
