@@ -14,7 +14,7 @@ To get the latest stable release use:
 
 ```yaml
 - name: Run PSRule analysis
-  uses: microsoft/ps-rule@v1.12.0
+  uses: microsoft/ps-rule@v2.0.0
 ```
 
 To get the latest bits use:
@@ -22,6 +22,16 @@ To get the latest bits use:
 ```yaml
 - name: Run PSRule analysis
   uses: microsoft/ps-rule@main
+```
+
+To use the latest action with an older version of PSRule, you can use the `version` parameter.
+For example:
+
+```yaml
+- name: Run PSRule analysis
+  uses: microsoft/ps-rule@v2.0.0
+  with:
+    version: '1.11.1'
 ```
 
 For a list of changes please see the [change log][2].
@@ -157,7 +167,7 @@ When set:
 To use PSRule:
 
 1. See [Creating a workflow file](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file).
-2. Reference `microsoft/ps-rule@v1.12.0`.
+2. Reference `microsoft/ps-rule@v2.0.0`.
 For example:
 
 ```yaml
@@ -170,10 +180,10 @@ jobs:
     steps:
 
     - name: Checkout
-      uses: actions/checkout@v2.4.0
+      uses: actions/checkout@v3
 
     - name: Run PSRule analysis
-      uses: microsoft/ps-rule@v1.12.0
+      uses: microsoft/ps-rule@v2.0.0
 ```
 
 3. Create rules within the `.ps-rule/` directory.
