@@ -2,10 +2,45 @@
 
 This document contains notes to help upgrade from previous versions of the PSRule GitHub Action.
 
+## Upgrade to v2.0.0 from v1.12.0
+
+This release of the PSRule GitHub Action moves to PSRule v2.
+PSRule v2 introduces a number of breaking changes.
+Please review the [upgrade notes](https://microsoft.github.io/PSRule/v2/upgrade-notes/#upgrading-to-v200) for details.
+
+To continue to use PSRule v1, please target the `v1.12.0` release.
+For example:
+
+```yaml
+- name: Run PSRule analysis
+  uses: microsoft/ps-rule@v1.12.0
+```
+
+**Note:** Some rules modules may depend on PSRule v2.
+To continue to work with PSRule v1 you may need to install older versions of these modules via PowerShell.
+
+To use the latest action with an older version of PSRule, you can use the `version` parameter.
+For example:
+
+```yaml
+- name: Run PSRule analysis
+  uses: microsoft/ps-rule@v2.0.0
+  with:
+    version: '1.11.1'
+```
+
+To upgrade to PSRule v2, target the `v2.0.0` release.
+For example:
+
+```yaml
+- name: Run PSRule analysis
+  uses: microsoft/ps-rule@v2.0.0
+```
+
 ## Upgrade to v0.3.0 from v0.2.x
 
 Follow these notes to upgrade from action version _v0.2.x_ to _v0.3.0_.
-For a list of upstream changes to the PSRule engine see [change log](https://github.com/microsoft/PSRule/blob/main/docs/CHANGELOG-v0.md#v0200).
+For a list of upstream changes to the PSRule engine see [change log](https://microsoft.github.io/PSRule/v2/CHANGELOG-v0/#v0200).
 
 ### Repository analysis
 
@@ -86,4 +121,4 @@ Rule 'OpenSource.License' -Type '.cs', '.ps1', '.psd1', '.psm1' {
 
 > To read more about the new `FilePath` and `FileHeader` assertion helpers see [about_PSRule_Assert]
 
-[about_PSRule_Assert]: https://microsoft.github.io/PSRule/concepts/PSRule/en-US/about_PSRule_Assert.html
+[about_PSRule_Assert]: https://microsoft.github.io/PSRule/v2/commands/PSRule/en-US/Assert-PSRule/
