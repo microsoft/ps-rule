@@ -34,14 +34,13 @@ jobs:
         inputType: repository
         modules: PSRule.Rules.MSFT.OSS
         repository: Local
+        version: '1.11.1'
 
     - name: Run PSRule v2
       uses: ./
       with:
         inputType: repository
         modules: PSRule.Rules.MSFT.OSS
-        prerelease: true
-        version: '2.0.0-B2203033'
 
     - name: Unregister repository
       shell: pwsh
