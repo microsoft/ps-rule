@@ -14,18 +14,14 @@ What's changed since v1.12.0:
     - By default, the latest stable version of PSRule is used.
   - Added support for outputting analysis results as SARIF. [#136](https://github.com/microsoft/ps-rule/issues/136)
     - To use the SARIF output format set the `outputFormat` parameter to `Sarif`.
-    - Currently a pre-release version of PSRule must be used.
-      To configure this:
-      - Set the `prerelease` parameter to `true` to include pre-release versions.
-      - Set the `version` parameter to `2.0.0-B2201161` or newer version.
   - Added the ability to use an alternative PowerShell repository. [#133](https://github.com/microsoft/ps-rule/issues/133)
     - Register and authenticate to the repository in PowerShell if required.
     - Configure `repository` to install modules from the named repository.
 - General improvements:
   - Exposed more rule error output in CI. [#140](https://github.com/microsoft/ps-rule/issues/140)
 - Engineering:
-  - Bump PSRule dependency to v1.11.1. [#147](https://github.com/microsoft/ps-rule/pull/147)
-    - See the [change log](https://microsoft.github.io/PSRule/latest/CHANGELOG-v1/#v1111)
+  - Bump PSRule dependency to v2.0.0. [#152](https://github.com/microsoft/ps-rule/pull/152)
+    - See the [change log](https://microsoft.github.io/PSRule/latest/CHANGELOG-v2/#v200)
 - Bug fixes:
   - Fixed import of pre-release version. [#138](https://github.com/microsoft/ps-rule/issues/138)
   - Fixed path issue for running out of repo. [#150](https://github.com/microsoft/ps-rule/issues/150)
