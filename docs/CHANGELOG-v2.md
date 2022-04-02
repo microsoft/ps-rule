@@ -6,6 +6,13 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
+What's changed since v2.0.0:
+
+- New features:
+  - Added support for alternative option file. [#155](https://github.com/microsoft/ps-rule/issues/155)
+    - Set the `option` parameter to the path to an options file.
+    - By default, the `ps-rule.yaml` option file is used.
+
 ## v2.0.0
 
 What's changed since v1.12.0:
