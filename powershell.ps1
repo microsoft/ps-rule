@@ -38,6 +38,10 @@ param (
     [Parameter(Mandatory = $False)]
     [String]$Conventions = $Env:INPUT_CONVENTIONS,
 
+    # The path to an options file.
+    [Parameter(Mandatory = $False)]
+    [String]$Option = $Env:INPUT_OPTION,
+
     # The output format
     [Parameter(Mandatory = $False)]
     [ValidateSet('None', 'Yaml', 'Json', 'NUnit3', 'Csv', 'Markdown', 'Sarif')]
@@ -209,7 +213,7 @@ catch {
 Write-Host '';
 Write-Host "[info] Using Version: $version";
 Write-Host "[info] Using Action: $Env:GITHUB_ACTION";
-Write-Host "[info] Using Workspace: $workspacePath"
+Write-Host "[info] Using Workspace: $workspacePath";
 Write-Host "[info] Using PWD: $PWD";
 Write-Host "[info] Using Path: $Path";
 Write-Host "[info] Using Source: $Source";
@@ -217,6 +221,7 @@ Write-Host "[info] Using Baseline: $Baseline";
 Write-Host "[info] Using Conventions: $Conventions";
 Write-Host "[info] Using InputType: $InputType";
 Write-Host "[info] Using InputPath: $InputPath";
+Write-Host "[info] Using Option: $Option";
 Write-Host "[info] Using OutputFormat: $OutputFormat";
 Write-Host "[info] Using OutputPath: $OutputPath";
 
@@ -241,6 +246,10 @@ try {
         $moduleNames = $Modules.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries);
         $invokeParams['Module'] = $moduleNames;
         WriteDebug ([String]::Concat('-Module ', [String]::Join(', ', $moduleNames)));
+    }
+    if (![String]::IsNullOrEmpty($Option)) {
+        $invokeParams['Option'] = $Option;
+        WriteDebug ([String]::Concat('-Option ', $Option));
     }
     if (![String]::IsNullOrEmpty($OutputFormat) -and ![String]::IsNullOrEmpty($OutputPath) -and $OutputFormat -ne 'None') {
         $invokeParams['OutputFormat'] = $OutputFormat;

@@ -39,6 +39,11 @@ inputs:
     default: ''
     required: false
 
+  option:
+    description: 'The path to an options file.'
+    default: ''
+    required: false
+
   outputFormat:
     description: 'The format to use when writing results to disk. When set to None results are not written to disk.'
     default: 'None'
@@ -76,4 +81,4 @@ runs:
     shell: pwsh
     working-directory: ${{ github.workspace }}
     run: |-
-      ${{ github.action_path }}/powershell.ps1 -InputType '${{ inputs.inputType }}' -InputPath '${{ inputs.inputPath }}' -Modules '${{ inputs.modules }}' -Source '${{ inputs.source }}' -Baseline '${{ inputs.baseline }}' -Conventions '${{ inputs.conventions }}' -OutputFormat '${{ inputs.outputFormat }}' -OutputPath '${{ inputs.outputPath }}' -Path '${{ inputs.path }}' -PreRelease '${{ inputs.prerelease }}' -Repository '${{ inputs.repository }}' -Version '${{ inputs.version }}'
+      ${{ github.action_path }}/powershell.ps1 -InputType '${{ inputs.inputType }}' -InputPath '${{ inputs.inputPath }}' -Modules '${{ inputs.modules }}' -Source '${{ inputs.source }}' -Baseline '${{ inputs.baseline }}' -Conventions '${{ inputs.conventions }}' -Option '${{ inputs.option }}' -OutputFormat '${{ inputs.outputFormat }}' -OutputPath '${{ inputs.outputPath }}' -Path '${{ inputs.path }}' -PreRelease '${{ inputs.prerelease }}' -Repository '${{ inputs.repository }}' -Version '${{ inputs.version }}'

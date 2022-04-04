@@ -50,6 +50,7 @@ For a list of changes please see the [change log][2].
     source: string                                               # Optional. A path containing rules to use for analysis.
     baseline: string                                             # Optional. The name of a PSRule baseline to use.
     conventions: string                                          # Optional. A comma separated list of conventions to use.
+    option: string                                               # Optional. The path to an options file.
     outputFormat: None, Yaml, Json, NUnit3, Csv, Markdown, Sarif # Optional. The format to use when writing results to disk.
     outputPath: string                                           # Optional. The file path to write results to.
     path: string                                                 # Optional. The working directory PSRule is run from.
@@ -109,6 +110,12 @@ Conventions can be used from modules or specified in a separate file.
 - To use a convention specified in a separate file use `source:` with `conventions:`.
 
 For example: `conventions: Monitor.LogAnalytics.Import`
+
+### `option`
+
+The path to an options file.
+By default, `ps-rule.yaml` will be used if it exists.
+Configure this parameter to use a different file.
 
 ### `outputFormat`
 
