@@ -12,6 +12,9 @@ What's changed since v2.0.1:
   - Added support for alternative option file. [#155](https://github.com/microsoft/ps-rule/issues/155)
     - Set the `option` parameter to the path to an options file.
     - By default, the `ps-rule.yaml` option file is used.
+- Engineering:
+  - Bump PSRule dependency to v2.1.0. [#165](https://github.com/microsoft/ps-rule/pull/165)
+    - See the [change log](https://microsoft.github.io/PSRule/latest/CHANGELOG-v2/#v210)
 
 ## v2.0.1
 
