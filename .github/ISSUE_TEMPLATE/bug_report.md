@@ -30,7 +30,7 @@ Steps to reproduce the issue:
 
 **Action version:**
 
-- Version: **[e.g. 2.0.0]**
+- Version: **[e.g. 2.1.0]**
 
 **Additional context**
 
