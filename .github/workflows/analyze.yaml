@@ -3,7 +3,7 @@
 #
 
 # NOTES:
-# This worflow uses PSRule, and DevSkim.
+# This workflow uses PSRule, and DevSkim.
 # You can read more about these linting tools and configuration options here:
 #   PSRule - https://aka.ms/ps-rule and https://github.com/Microsoft/PSRule.Rules.MSFT.OSS
 #   DevSkim - https://github.com/microsoft/DevSkim-Action and https://github.com/Microsoft/DevSkim
