@@ -11,6 +11,8 @@ What's changed since v2.3.2:
 - General improvements:
   - Improved documentation for `inputPath` input parameter by @BernieWhite.
     [#181](https://github.com/microsoft/ps-rule/issues/181)
+  - Added additional exception logging to improve debugging by @BernieWhite.
+    [#180](https://github.com/microsoft/ps-rule/issues/180)
 - Engineering:
   - Bump PSRule to v2.4.0.
     [#182](https://github.com/microsoft/ps-rule/pull/182)
