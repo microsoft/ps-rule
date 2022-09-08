@@ -72,7 +72,12 @@ When set to:
 ### `inputPath`
 
 The path PSRule will look for input files.
+You can still use this parameter even when `inputType` is set to `repository`.
+
+This must be a relative path from the `path` input parameter.
 Defaults to repository root.
+
+**Note:** Avoid using a relative path starting with `/`, as a leading slash indicates _root_ on Linux.
 
 ### `modules`
 
