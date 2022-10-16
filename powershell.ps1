@@ -42,6 +42,10 @@ param (
     [Parameter(Mandatory = $False)]
     [String]$Option = $Env:INPUT_OPTION,
 
+    # Filters output to include results with the specified outcome.
+    [Parameter(Mandatory = $False)]
+    [String]$Outcome = $Env:INPUT_OUTCOME,
+
     # The output format
     [Parameter(Mandatory = $False)]
     [ValidateSet('None', 'Yaml', 'Json', 'NUnit3', 'Csv', 'Markdown', 'Sarif')]
@@ -250,6 +254,10 @@ try {
     if (![String]::IsNullOrEmpty($Option)) {
         $invokeParams['Option'] = $Option;
         WriteDebug ([String]::Concat('-Option ', $Option));
+    }
+    if (![String]::IsNullOrEmpty($Outcome)) {
+        $invokeParams['Outcome'] = $Outcome;
+        WriteDebug ([String]::Concat('-Outcome ', $Outcome));
     }
     if (![String]::IsNullOrEmpty($OutputFormat) -and ![String]::IsNullOrEmpty($OutputPath) -and $OutputFormat -ne 'None') {
         $invokeParams['OutputFormat'] = $OutputFormat;

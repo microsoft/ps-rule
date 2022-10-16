@@ -19,7 +19,7 @@ function Update-Dependencies {
         $devDependencies = CheckVersion $modules.devDependencies -Repository $Repository -Dev;
 
         $modules = [Ordered]@{
-            dependencies = $dependencies
+            dependencies    = $dependencies
             devDependencies = $devDependencies
         }
         $modules | ConvertTo-Json -Depth 10 | Set-Content -Path $Path;

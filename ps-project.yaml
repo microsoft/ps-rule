@@ -1,4 +1,3 @@
-
 info:
   name: PSRule
   description: Validate infrastructure as code (IaC) and DevOps repositories using GitHub Actions.
