@@ -14,7 +14,7 @@ To get the latest stable release use:
 
 ```yaml
 - name: Run PSRule analysis
-  uses: microsoft/ps-rule@v2.4.1
+  uses: microsoft/ps-rule@v2.5.0
 ```
 
 To get the latest bits use:
@@ -29,7 +29,7 @@ For example:
 
 ```yaml
 - name: Run PSRule analysis
-  uses: microsoft/ps-rule@v2.4.1
+  uses: microsoft/ps-rule@v2.5.0
   with:
     version: '1.11.1'
 ```
@@ -186,7 +186,7 @@ When set:
 To use PSRule:
 
 1. See [Creating a workflow file](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file).
-2. Reference `microsoft/ps-rule@v2.4.1`.
+2. Reference `microsoft/ps-rule@v2.5.0`.
 For example:
 
 ```yaml
@@ -202,7 +202,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Run PSRule analysis
-      uses: microsoft/ps-rule@v2.4.1
+      uses: microsoft/ps-rule@v2.5.0
 ```
 
 3. Create rules within the `.ps-rule/` directory.
@@ -232,8 +232,9 @@ and actually do, grant us the rights to use your contribution. For details, visi
 <https://cla.microsoft.com>.
 
 When you submit a pull request, a CLA-bot will automatically determine whether you need
-to provide a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the
-instructions provided by the bot. You will only need to do this once across all repositories using our CLA.
+to provide a CLA and decorate the PR appropriately (e.g., label, comment).
+Simply follow the instructions provided by the bot.
+You will only need to do this once across all repositories using our CLA.
 
 ## Code of Conduct
 
@@ -244,7 +245,7 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 ## Maintainers
 
 - [Bernie White](https://github.com/BernieWhite)
-- [Armaan Mcleod](https://github.com/ArmaanMcleod)
+- [Sam Bell](https://github.com/ms-sambell)
 
 ## License
 
