@@ -18,9 +18,9 @@ param (
     [ValidateSet('repository', 'inputPath')]
     [String]$InputType = $Env:INPUT_INPUTTYPE,
 
-     # The path to input files
-     [Parameter(Mandatory = $False)]
-     [String]$InputPath = $Env:INPUT_INPUTPATH,
+    # The path to input files
+    [Parameter(Mandatory = $False)]
+    [String]$InputPath = $Env:INPUT_INPUTPATH,
 
     # The path to find rules
     [Parameter(Mandatory = $False)]
@@ -226,14 +226,15 @@ Write-Host "[info] Using Conventions: $Conventions";
 Write-Host "[info] Using InputType: $InputType";
 Write-Host "[info] Using InputPath: $InputPath";
 Write-Host "[info] Using Option: $Option";
+Write-Host "[info] Using Outcome: $Outcome";
 Write-Host "[info] Using OutputFormat: $OutputFormat";
 Write-Host "[info] Using OutputPath: $OutputPath";
 
 try {
     Push-Location -Path $Path;
     $invokeParams = @{
-        Path = $Source
-        Style = 'GitHubActions'
+        Path        = $Source
+        Style       = 'GitHubActions'
         ErrorAction = 'Stop'
     }
     WriteDebug "Preparing command-line:";
