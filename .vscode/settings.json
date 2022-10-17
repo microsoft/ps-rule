@@ -25,6 +25,9 @@
   "[jsonc]": {
     "editor.tabSize": 2
   },
+  "[powershell]": {
+    "editor.formatOnSave": false
+  },
   "cSpell.words": [
     "SARIF"
   ]
