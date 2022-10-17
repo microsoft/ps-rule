@@ -6,14 +6,14 @@
 # https://microsoft.github.io/PSRule/
 
 requires:
-  PSRule: '@pre >=1.11.0'
+  PSRule: "@pre >=1.11.0"
 
 output:
   culture:
-  - en-US
+    - en-US
 
 input:
   pathIgnore:
-  - '*.md'
-  - '*.json'
-  - '.vscode/'
+    - "*.md"
+    - "*.json"
+    - ".vscode/"

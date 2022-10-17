@@ -41,6 +41,7 @@ jobs:
       with:
         inputType: repository
         modules: PSRule.Rules.MSFT.OSS
+        outcome: Problem
 
     - name: Unregister repository
       shell: pwsh

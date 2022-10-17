@@ -51,6 +51,7 @@ For a list of changes please see the [change log][2].
     baseline: string                                             # Optional. The name of a PSRule baseline to use.
     conventions: string                                          # Optional. A comma separated list of conventions to use.
     option: string                                               # Optional. The path to an options file.
+    outcome: Fail, Pass, Error, Processed, Problem, All          # Optional. Filters output to include results with the specified outcome.
     outputFormat: None, Yaml, Json, NUnit3, Csv, Markdown, Sarif # Optional. The format to use when writing results to disk.
     outputPath: string                                           # Optional. The file path to write results to.
     path: string                                                 # Optional. The working directory PSRule is run from.
@@ -121,6 +122,12 @@ For example: `conventions: Monitor.LogAnalytics.Import`
 The path to an options file.
 By default, `ps-rule.yaml` will be used if it exists.
 Configure this parameter to use a different file.
+
+### `outcome`
+
+Filters output to include results with the specified outcome.
+Supported outcomes are `Fail`, `Pass`, `Error`, `Processed`, `Problem`, `All`.
+Defaults to `Processed`.
 
 ### `outputFormat`
 
@@ -222,7 +229,7 @@ Rule 'GitHub.Community' -Type 'PSRule.Data.RepositoryInfo' {
 This project welcomes contributions and suggestions. Most contributions require you to
 agree to a Contributor License Agreement (CLA) declaring that you have the right to,
 and actually do, grant us the rights to use your contribution. For details, visit
-https://cla.microsoft.com.
+<https://cla.microsoft.com>.
 
 When you submit a pull request, a CLA-bot will automatically determine whether you need
 to provide a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the

@@ -8,7 +8,6 @@ branding:
   icon: 'check-circle'
   color: 'green'
 inputs:
-
   inputType:
     description: 'Determines the type of input to use for PSRule.'
     default: 'repository'
@@ -41,6 +40,11 @@ inputs:
 
   option:
     description: 'The path to an options file.'
+    default: ''
+    required: false
+
+  outcome:
+    description: 'Filters output to include results with the specified outcome.'
     default: ''
     required: false
 
@@ -77,8 +81,8 @@ inputs:
 runs:
   using: 'composite'
   steps:
-  - name: 'Analysis'
-    shell: pwsh
-    working-directory: ${{ github.workspace }}
-    run: |-
-      ${{ github.action_path }}/powershell.ps1 -InputType '${{ inputs.inputType }}' -InputPath '${{ inputs.inputPath }}' -Modules '${{ inputs.modules }}' -Source '${{ inputs.source }}' -Baseline '${{ inputs.baseline }}' -Conventions '${{ inputs.conventions }}' -Option '${{ inputs.option }}' -OutputFormat '${{ inputs.outputFormat }}' -OutputPath '${{ inputs.outputPath }}' -Path '${{ inputs.path }}' -PreRelease '${{ inputs.prerelease }}' -Repository '${{ inputs.repository }}' -Version '${{ inputs.version }}'
+    - name: 'Analysis'
+      shell: pwsh
+      working-directory: ${{ github.workspace }}
+      run: |-
+        ${{ github.action_path }}/powershell.ps1 -InputType '${{ inputs.inputType }}' -InputPath '${{ inputs.inputPath }}' -Modules '${{ inputs.modules }}' -Source '${{ inputs.source }}' -Baseline '${{ inputs.baseline }}' -Conventions '${{ inputs.conventions }}' -Option '${{ inputs.option }}' -Outcome '${{ inputs.outcome }}' -OutputFormat '${{ inputs.outputFormat }}' -OutputPath '${{ inputs.outputPath }}' -Path '${{ inputs.path }}' -PreRelease '${{ inputs.prerelease }}' -Repository '${{ inputs.repository }}' -Version '${{ inputs.version }}'

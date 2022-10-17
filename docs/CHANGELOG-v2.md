@@ -8,6 +8,9 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 What's changed since v2.4.2:
 
+- General improvements:
+  - Added outcome filtering parameter by @BernieWhite.
+    [#171](https://github.com/microsoft/ps-rule/issues/171)
 - Engineering:
   - Bump PSRule to v2.5.0.
     [#194](https://github.com/microsoft/ps-rule/pull/194)
