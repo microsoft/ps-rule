@@ -6,6 +6,8 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
+## v2.5.0
+
 What's changed since v2.4.2:
 
 - General improvements:
