@@ -11,11 +11,11 @@
 name: Analyze
 on:
   push:
-    branches: [ main, 'release/*', 'dependencies/*' ]
+    branches: [main, 'release/*', 'dependencies/*']
   pull_request:
-    branches: [ main, 'release/*' ]
+    branches: [main, 'release/*']
   schedule:
-  - cron: '42 18 * * 0' # At 6:42 PM, on Sunday each week
+    - cron: '42 18 * * 0' # At 6:42 PM, on Sunday each week
   workflow_dispatch:
 
 jobs:
@@ -25,15 +25,14 @@ jobs:
     permissions:
       contents: read
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Checkout
-      uses: actions/checkout@v3
-
-    - name: Run PSRule analysis
-      uses: microsoft/ps-rule@v2.5.1
-      with:
-        modules: PSRule.Rules.MSFT.OSS
-        prerelease: true
+      - name: Run PSRule analysis
+        uses: microsoft/ps-rule@v2.5.1
+        with:
+          modules: PSRule.Rules.MSFT.OSS
+          prerelease: true
 
   devskim:
     name: Analyze with DevSkim
@@ -43,7 +42,6 @@ jobs:
       contents: read
       security-events: write
     steps:
-
       - name: Checkout
         uses: actions/checkout@v3
 

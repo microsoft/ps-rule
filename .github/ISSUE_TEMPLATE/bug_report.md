@@ -30,7 +30,7 @@ Steps to reproduce the issue:
 
 **Action version:**
 
-- Version: **microsoft/ps-rule@v2.5.1**
+- Version: **microsoft/ps-rule@v2.5.2**
 
 **Additional context**
 
