@@ -6,6 +6,13 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
+What's changed since v2.6.0:
+
+- Engineering:
+  - Bump PSRule to v2.7.0.
+    [#209](https://github.com/microsoft/ps-rule/pull/209)
+    - See the [change log](https://microsoft.github.io/PSRule/v2/CHANGELOG-v2/#v270)
+
 ## v2.6.0
 
 What's changed since v2.5.2:
