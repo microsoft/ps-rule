@@ -24,11 +24,10 @@ on:
         default: v2
 
 env:
-  RELEASE_BRANCH: ${{ inputs.major | 'v2' }}
+  RELEASE_BRANCH: ${{ inputs.major || 'v2' }}
   LATEST_BRANCH: v2
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   branch:
