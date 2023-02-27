@@ -18,20 +18,20 @@ function Update-Branch {
         [Switch]$Latest
     )
     process {
-        $latest = Get-LatestVersion -Remote $Remote -Major $Major;
+        $version = Get-LatestVersion -Remote $Remote -Major $Major;
 
-        Write-Host "Latest stable release is: $latest";
-        Write-Host "Checking out tag for: $latest"
+        Write-Host "Latest stable release is: $version";
+        Write-Host "Checking out tag for: $version"
 
         git fetch --tags $Remote;
-        git checkout refs/tags/v$latest;
+        git checkout refs/tags/v$version;
 
         Write-Host "Updating release branch: $Major";
-        git push $Remote refs/tags/v$latest`:refs/heads/$Major --force;
+        git push $Remote refs/tags/v$version`:refs/heads/$Major --force;
 
         if ($Latest) {
             Write-Host "Updating latest to: $Major";
-            git push $Remote refs/tags/v$latest`:refs/heads/latest --force;
+            git push $Remote refs/tags/v$version`:refs/heads/latest --force;
         }
 
         git checkout main;
