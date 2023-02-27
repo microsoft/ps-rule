@@ -1,0 +1,58 @@
+#
+# Automated updates for release branches
+#
+
+# NOTES:
+# This automatically bumps release branches to the latest stable tag.
+
+name: Release
+
+on:
+  release:
+    types:
+      - created
+      - deleted
+  workflow_dispatch:
+    inputs:
+      major:
+        type: choice
+        description: Determines the release branch to bump.
+        required: true
+        options:
+          - 'v1'
+          - 'v2'
+        default: v2
+
+env:
+  RELEASE_BRANCH: ${{ inputs.major | 'v2' }}
+  LATEST_BRANCH: v2
+
+permissions:
+  contents: read
+
+jobs:
+  branch:
+    name: Update release branch
+    runs-on: ubuntu-latest
+    if: github.repository == 'microsoft/ps-rule'
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Configure
+        run: |
+          git config user.name github-actions
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+      - name: Push release branch
+        run: |
+          Import-Module ./scripts/branches.psm1;
+          $latest = '${{ env.RELEASE_BRANCH }}' -eq '${{ env.LATEST_BRANCH }}';
+          Update-Branch -Remote origin -Major ${{ env.RELEASE_BRANCH }} -Latest:$latest;
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

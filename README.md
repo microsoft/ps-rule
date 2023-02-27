@@ -14,6 +14,20 @@ To get the latest stable release use:
 
 ```yaml
 - name: Run PSRule analysis
+  uses: microsoft/ps-rule@latest
+```
+
+To get the latest stable release by major version use:
+
+```yaml
+- name: Run PSRule analysis
+  uses: microsoft/ps-rule@v2
+```
+
+To get a specific release use:
+
+```yaml
+- name: Run PSRule analysis
   uses: microsoft/ps-rule@v2.7.0
 ```
 

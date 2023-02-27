@@ -6,6 +6,12 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
+What's changed since v2.8.0:
+
+- General improvements:
+  - Added support for action release branches by @BernieWhite.
+    [#214](https://github.com/microsoft/ps-rule/issues/214)
+
 ## v2.7.0
 
 What's changed since v2.6.0:
