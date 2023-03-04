@@ -62,6 +62,10 @@ param (
     # The name of the PowerShell repository where PSRule modules are installed from.
     [String]$Repository = $Env:INPUT_REPOSITORY,
 
+    # Determines if a job summary is written.
+    [Parameter(Mandatory = $False)]
+    [String]$Summary = $Env:INPUT_SUMMARY,
+
     # The specific version of PSRule to use.
     [Parameter(Mandatory = $False)]
     [String]$Version = $Env:INPUT_VERSION
@@ -229,6 +233,7 @@ Write-Host "[info] Using Option: $Option";
 Write-Host "[info] Using Outcome: $Outcome";
 Write-Host "[info] Using OutputFormat: $OutputFormat";
 Write-Host "[info] Using OutputPath: $OutputPath";
+Write-Host "[info] Using Summary: $Summary";
 
 try {
     Push-Location -Path $Path;
@@ -265,6 +270,9 @@ try {
         $invokeParams['OutputPath'] = $OutputPath;
         WriteDebug ([String]::Concat('-OutputFormat ', $OutputFormat, ' -OutputPath ''', $OutputPath, ''''));
     }
+    if ($Summary -eq 'true') {
+        $Env:PSRULE_OUTPUT_JOBSUMMARYPATH = 'reports/ps_rule_summary.md';
+    }
 
     # repository
     if ($InputType -eq 'repository') {
@@ -297,6 +305,16 @@ catch {
     $Host.SetShouldExit(1);
 }
 finally {
+    try {
+        if ($Summary -eq 'true' -and (Test-Path -Path 'reports/ps_rule_summary.md')) {
+            Get-Content -Path 'reports/ps_rule_summary.md' -Raw > $Env:GITHUB_STEP_SUMMARY;
+            $Null = Remove-Item -Path 'reports/ps_rule_summary.md' -Force;
+        }
+    }
+    catch {
+        Write-Host "::warning::Failed to write job summary: $($_.Exception.Message)";
+        Write-Host "$($_.Exception.ScriptStackTrace)";
+    }
     Pop-Location;
 }
 Write-Host '---';

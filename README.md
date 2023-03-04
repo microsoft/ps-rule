@@ -71,6 +71,7 @@ For a list of changes please see the [change log][2].
     path: string                                                 # Optional. The working directory PSRule is run from.
     prerelease: boolean                                          # Optional. Determine if a pre-release module version is installed.
     repository: string                                           # Optional. The name of the PowerShell repository where PSRule modules are installed from.
+    summary: boolean                                             # Optional. Determines if a job summary is written.
     version: string                                              # Optional. The specific version of PSRule to use.
 ```
 
@@ -184,6 +185,12 @@ Register-PSRepository -SourceLocation \\server\share -Name Local -InstallationPo
 For details PowerShell repositories see [Working with Private PowerShellGet Repositories][4].
 
   [4]: https://docs.microsoft.com/powershell/scripting/gallery/how-to/working-with-local-psrepositories
+
+### `summary`
+
+Determines if a job summary is written.
+By default, a job summary is generated and attached to the workflow run.
+When set to `false` the job summary is skipped.
 
 ### `version`
 

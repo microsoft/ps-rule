@@ -8,6 +8,10 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 What's changed since v2.8.0:
 
+- New features:
+  - Added job summaries to each run by @BernieWhite.
+    [#218](https://github.com/microsoft/ps-rule/issues/218)
+    - Set the `summary` input to `false` to skip generating a job summary.
 - General improvements:
   - Added support for action release branches by @BernieWhite.
     [#214](https://github.com/microsoft/ps-rule/issues/214)
