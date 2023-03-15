@@ -73,6 +73,11 @@ inputs:
     default: 'PSGallery'
     required: false
 
+  summary:
+    description: 'Determines if a job summary is written.'
+    default: 'true'
+    required: false
+
   version:
     description: 'The specific version of PSRule to use.'
     default: ''
@@ -85,4 +90,4 @@ runs:
       shell: pwsh
       working-directory: ${{ github.workspace }}
       run: |-
-        ${{ github.action_path }}/powershell.ps1 -InputType '${{ inputs.inputType }}' -InputPath '${{ inputs.inputPath }}' -Modules '${{ inputs.modules }}' -Source '${{ inputs.source }}' -Baseline '${{ inputs.baseline }}' -Conventions '${{ inputs.conventions }}' -Option '${{ inputs.option }}' -Outcome '${{ inputs.outcome }}' -OutputFormat '${{ inputs.outputFormat }}' -OutputPath '${{ inputs.outputPath }}' -Path '${{ inputs.path }}' -PreRelease '${{ inputs.prerelease }}' -Repository '${{ inputs.repository }}' -Version '${{ inputs.version }}'
+        ${{ github.action_path }}/powershell.ps1 -InputType '${{ inputs.inputType }}' -InputPath '${{ inputs.inputPath }}' -Modules '${{ inputs.modules }}' -Source '${{ inputs.source }}' -Baseline '${{ inputs.baseline }}' -Conventions '${{ inputs.conventions }}' -Option '${{ inputs.option }}' -Outcome '${{ inputs.outcome }}' -OutputFormat '${{ inputs.outputFormat }}' -OutputPath '${{ inputs.outputPath }}' -Path '${{ inputs.path }}' -PreRelease '${{ inputs.prerelease }}' -Repository '${{ inputs.repository }}' -Summary '${{ inputs.summary }}' -Version '${{ inputs.version }}'
