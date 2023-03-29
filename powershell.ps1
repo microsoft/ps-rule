@@ -272,6 +272,7 @@ try {
     }
     if ($Summary -eq 'true') {
         $Env:PSRULE_OUTPUT_JOBSUMMARYPATH = 'reports/ps_rule_summary.md';
+        $invokeParams['As'] = 'Detail';
     }
 
     # repository
