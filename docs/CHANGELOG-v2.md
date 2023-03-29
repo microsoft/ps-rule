@@ -15,6 +15,9 @@ What's changed since v2.8.0:
 - General improvements:
   - Added support for action release branches by @BernieWhite.
     [#214](https://github.com/microsoft/ps-rule/issues/214)
+- Bug fixes:
+  - Fixed summary with job summary by @BernieWhite.
+    [#221](https://github.com/microsoft/ps-rule/issues/221)
 
 ## v2.7.0
 
