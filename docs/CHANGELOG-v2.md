@@ -6,7 +6,9 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
-What's changed since v2.8.0:
+## v2.8.0
+
+What's changed since v2.7.0:
 
 - New features:
   - Added job summaries to each run by @BernieWhite.
