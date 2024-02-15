@@ -24,7 +24,7 @@ To get the latest stable release by major version use:
   uses: microsoft/ps-rule@v2
 ```
 
-To get a specific release use:
+To get a specific release use **(recommended)**:
 
 ```yaml
 - name: Run PSRule analysis
@@ -49,6 +49,19 @@ For example:
 ```
 
 For a list of changes please see the [change log][2].
+
+---
+
+The recommended approach is to pin to the latest specific release.
+Pinning to a specific release reduces the risk of new releases breaking your pipeline.
+You can easily update to the latest release by changing the version number.
+At such time, you can test the new release in a feature branch before merging to main.
+
+Using `microsoft/ps-rule@main` is **not recommended** for production workflows.
+The `main` branch is under **active development and may be unstable**.
+Use `microsoft/ps-rule@main` to try latest updates ahead of a stable release and provide feedback.
+
+---
 
   [2]: CHANGELOG.md
 
@@ -245,6 +258,19 @@ Rule 'GitHub.Community' -Type 'PSRule.Data.RepositoryInfo' {
 
 4. Run the workflow.
 
+## Support
+
+This project uses GitHub Issues to track bugs and feature requests.
+Please search the existing issues before filing new issues to avoid duplicates.
+
+- For new issues, file your bug or feature request as a new [issue].
+- For help, discussion, and support questions about using this project, join or start a [discussion].
+
+Support for this project/ product is limited to the resources listed above.
+
+[issue]: https://github.com/microsoft/ps-rule/issues
+[discussion]: https://github.com/microsoft/ps-rule/discussions
+
 ## Contributing
 
 This project welcomes contributions and suggestions. Most contributions require you to
@@ -266,8 +292,14 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 ## Maintainers
 
 - [Bernie White](https://github.com/BernieWhite)
-- [Sam Bell](https://github.com/ms-sambell)
 
 ## License
 
 This project is [licensed under the MIT License](LICENSE).
+
+## Trademarks
+
+This project may contain trademarks or logos for projects, products, or services.
+Authorized use of Microsoft trademarks or logos is subject to and must follow [Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/legal/intellectualproperty/trademarks).
+Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
+Any use of third-party trademarks or logos are subject to those third-party's policies.
