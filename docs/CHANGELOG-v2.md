@@ -6,6 +6,12 @@ See [upgrade notes][upgrade-notes] for helpful information when upgrading from p
 
 ## Unreleased
 
+What's changed since v2.9.0:
+
+- General improvements:
+  - Added support for specifying an absolutely source path by @BernieWhite.
+    [#237](https://github.com/microsoft/ps-rule/issues/237)
+
 ## v2.9.0
 
 What's changed since v2.8.1:
