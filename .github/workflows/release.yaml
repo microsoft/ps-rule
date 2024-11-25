@@ -21,13 +21,14 @@ on:
         options:
           - 'v1'
           - 'v2'
-        default: v2
-
-env:
-  RELEASE_BRANCH: ${{ inputs.major || 'v2' }}
-  LATEST_BRANCH: v2
+          - 'v3'
+        default: v3
 
 permissions: {}
+
+env:
+  RELEASE_BRANCH: ${{ inputs.major || 'v3' }}
+  LATEST_BRANCH: v3
 
 jobs:
   branch:
