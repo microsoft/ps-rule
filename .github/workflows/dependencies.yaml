@@ -11,6 +11,8 @@ on:
     - cron: '50 1 * * 1' # At 01:50 AM, on Monday each week
   workflow_dispatch:
 
+permissions: {}
+
 env:
   WORKING_BRANCH: dependencies/powershell-bump
 
