@@ -31,12 +31,34 @@ To get a specific release use **(recommended)**:
   uses: microsoft/ps-rule@v2.9.0
 ```
 
-To get the latest bits use:
+---
+
+> [!TIP]
+> The recommended approach is to pin to the latest specific release for example `microsoft/ps-rule@v2.9.0`.
+> Pinning to a specific release reduces the risk of new releases breaking your pipeline.
+>
+> You can easily update to the latest release by changing the version number or using version updates with Dependabot.
+> To configure version updates of `github-actions` with Dependabot see [Configuring version updates][5].
+>
+> When the next release is available, bumping the version allows you to test in a feature branch before merging to main.
+
+---
+
+To get the latest bits use **(not recommended for general use or production)**:
 
 ```yaml
 - name: Run PSRule analysis
   uses: microsoft/ps-rule@main
 ```
+
+---
+
+> [!CAUTION]
+> Using `microsoft/ps-rule@main` is **not recommended** for general use or production workflows.
+> The `main` branch is under **active development and may be unstable** or include breaking changes.
+> Use `microsoft/ps-rule@main` to try latest updates before the next stable release and provide feedback.
+
+---
 
 To use the latest action with an older version of PSRule, you can use the `version` parameter.
 For example:
@@ -50,20 +72,8 @@ For example:
 
 For a list of changes please see the [change log][2].
 
----
-
-The recommended approach is to pin to the latest specific release.
-Pinning to a specific release reduces the risk of new releases breaking your pipeline.
-You can easily update to the latest release by changing the version number.
-At such time, you can test the new release in a feature branch before merging to main.
-
-Using `microsoft/ps-rule@main` is **not recommended** for production workflows.
-The `main` branch is under **active development and may be unstable**.
-Use `microsoft/ps-rule@main` to try latest updates ahead of a stable release and provide feedback.
-
----
-
   [2]: CHANGELOG.md
+  [5]: https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuring-dependabot-version-updates#enabling-dependabot-version-updates
 
 ## Inputs
 
