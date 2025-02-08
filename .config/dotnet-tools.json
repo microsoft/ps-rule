@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "microsoft.psrule.tool": {
+      "version": "3.0.0-b0416",
+      "commands": [
+        "ps-rule"
+      ],
+      "rollForward": false
+    }
+  }
+}

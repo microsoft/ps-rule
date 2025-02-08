@@ -8,14 +8,9 @@ branding:
   icon: 'check-circle'
   color: 'green'
 inputs:
-  inputType:
-    description: 'Determines the type of input to use for PSRule.'
-    default: 'repository'
-    required: false
-
   inputPath:
     description: 'The path PSRule will look for files to validate.'
-    default: ''
+    default: '.'
     required: false
 
   modules:
@@ -45,7 +40,7 @@ inputs:
 
   outcome:
     description: 'Filters output to include results with the specified outcome.'
-    default: ''
+    default: 'Processed'
     required: false
 
   outputFormat:
@@ -86,8 +81,21 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    # - name: Setup dotnet
+    #   uses: actions/setup-dotnet@v4
+    #   with:
+    #     dotnet-version: '9.0.102'
+
+    - name: Install PSRule
+      shell: pwsh
+      run: |
+        dotnet --version
+        dotnet tool restore --tool-manifest $Env:GITHUB_ACTION_PATH/.config/dotnet-tools.json
+
     - name: 'Analysis'
       shell: pwsh
       working-directory: ${{ github.workspace }}
       run: |-
-        ${{ github.action_path }}/powershell.ps1 -InputType '${{ inputs.inputType }}' -InputPath '${{ inputs.inputPath }}' -Modules '${{ inputs.modules }}' -Source '${{ inputs.source }}' -Baseline '${{ inputs.baseline }}' -Conventions '${{ inputs.conventions }}' -Option '${{ inputs.option }}' -Outcome '${{ inputs.outcome }}' -OutputFormat '${{ inputs.outputFormat }}' -OutputPath '${{ inputs.outputPath }}' -Path '${{ inputs.path }}' -PreRelease '${{ inputs.prerelease }}' -Repository '${{ inputs.repository }}' -Summary '${{ inputs.summary }}' -Version '${{ inputs.version }}'
+        # ${{ github.action_path }}/powershell.ps1 -InputType '${{ inputs.inputType }}' -InputPath '${{ inputs.inputPath }}' -Modules '${{ inputs.modules }}' -Source '${{ inputs.source }}' -Baseline '${{ inputs.baseline }}' -Conventions '${{ inputs.conventions }}' -Option '${{ inputs.option }}' -Outcome '${{ inputs.outcome }}' -OutputFormat '${{ inputs.outputFormat }}' -OutputPath '${{ inputs.outputPath }}' -Path '${{ inputs.path }}' -PreRelease '${{ inputs.prerelease }}' -Repository '${{ inputs.repository }}' -Summary '${{ inputs.summary }}' -Version '${{ inputs.version }}'
+
+        dotnet tool run ps-rule run -f '${{ inputs.inputPath }}'

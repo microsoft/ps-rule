@@ -40,18 +40,9 @@ jobs:
           Save-Module -Name PSRule.Rules.MSFT.OSS -Repository PSGallery -Path out/repo/;
           Register-PSRepository -SourceLocation out/repo -Name Local -InstallationPolicy Trusted;
 
-      - name: Run PSRule v1
+      - name: Run PSRule
         uses: ./
         with:
-          inputType: repository
-          modules: PSRule.Rules.MSFT.OSS
-          repository: Local
-          version: '1.11.1'
-
-      - name: Run PSRule v2
-        uses: ./
-        with:
-          inputType: repository
           modules: PSRule.Rules.MSFT.OSS
           outcome: Problem
 
@@ -74,7 +65,6 @@ jobs:
       - name: Run PSRule self analysis
         uses: ./
         with:
-          inputType: repository
           outputFormat: Markdown
           outputPath: reports/report.md
           modules: PSRule.Rules.MSFT.OSS

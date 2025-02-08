@@ -13,11 +13,6 @@ param (
     [Parameter(Mandatory = $False)]
     [String]$Path = $Env:INPUT_PATH,
 
-    # The type of input
-    [Parameter(Mandatory = $False)]
-    [ValidateSet('repository', 'inputPath')]
-    [String]$InputType = $Env:INPUT_INPUTTYPE,
-
     # The path to input files
     [Parameter(Mandatory = $False)]
     [String]$InputPath = $Env:INPUT_INPUTPATH,
@@ -75,11 +70,6 @@ $workspacePath = $Env:GITHUB_WORKSPACE;
 $ProgressPreference = [System.Management.Automation.ActionPreference]::SilentlyContinue;
 if ($Env:SYSTEM_DEBUG -eq 'true') {
     $VerbosePreference = [System.Management.Automation.ActionPreference]::Continue;
-}
-
-# Check inputType
-if ([String]::IsNullOrEmpty($InputType) -or $InputType -notin 'repository', 'inputPath') {
-    $InputType = 'repository';
 }
 
 # Set workspace
@@ -227,7 +217,6 @@ Write-Host "[info] Using Path: $Path";
 Write-Host "[info] Using Source: $Source";
 Write-Host "[info] Using Baseline: $Baseline";
 Write-Host "[info] Using Conventions: $Conventions";
-Write-Host "[info] Using InputType: $InputType";
 Write-Host "[info] Using InputPath: $InputPath";
 Write-Host "[info] Using Option: $Option";
 Write-Host "[info] Using Outcome: $Outcome";
@@ -275,20 +264,10 @@ try {
         $invokeParams['As'] = 'Detail';
     }
 
-    # repository
-    if ($InputType -eq 'repository') {
-        WriteDebug 'Running ''Assert-PSRule'' with repository as input.';
-        Write-Host '';
-        Write-Host '---';
-        Assert-PSRule @invokeParams -InputPath $InputPath -Format File;
-    }
-    # inputPath
-    elseif ($InputType -eq 'inputPath') {
-        WriteDebug 'Running ''Assert-PSRule'' with input from path.';
-        Write-Host '';
-        Write-Host '---';
-        Assert-PSRule @invokeParams -InputPath $InputPath;
-    }
+    WriteDebug 'Running ''Assert-PSRule'' with input from path.';
+    Write-Host '';
+    Write-Host '---';
+    Assert-PSRule @invokeParams -InputPath $InputPath;
 }
 catch [PSRule.Pipeline.RuleException] {
     Write-Host "::error::Rule exception: $($_.Exception.Message)";
