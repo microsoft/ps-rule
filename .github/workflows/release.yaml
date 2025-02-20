@@ -19,9 +19,9 @@ on:
         description: Determines the release branch to bump.
         required: true
         options:
-          - 'v1'
-          - 'v2'
-          - 'v3'
+          - "v1"
+          - "v2"
+          - "v3"
         default: v3
 
 permissions: {}
@@ -39,7 +39,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
 
