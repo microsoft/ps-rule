@@ -2,90 +2,114 @@
 # Licensed under the MIT License.
 
 #
-# PSRule
+# PSRule bootstrap script.
 #
 
-# See details at: https://github.com/microsoft/ps-rule
+# See details at: https://github.com/microsoft/PSRule/blob/main/src/bootstrap/README.md
 
 [CmdletBinding()]
 param (
-    # The root path for analysis
     [Parameter(Mandatory = $False)]
-    [String]$Path = $Env:INPUT_PATH,
+    [String]$WorkspacePath = $PWD,
 
-    # The type of input
+    # The source path.
     [Parameter(Mandatory = $False)]
-    [ValidateSet('repository', 'inputPath')]
-    [String]$InputType = $Env:INPUT_INPUTTYPE,
+    [String]$IncludePath,
 
     # The path to input files
     [Parameter(Mandatory = $False)]
-    [String]$InputPath = $Env:INPUT_INPUTPATH,
-
-    # The path to find rules
-    [Parameter(Mandatory = $False)]
-    [String]$Source = $Env:INPUT_SOURCE,
+    [String]$InputPath,
 
     # Rule modules to use
     [Parameter(Mandatory = $False)]
-    [String]$Modules = $Env:INPUT_MODULES,
+    [String]$Modules,
 
     # A baseline to use
     [Parameter(Mandatory = $False)]
-    [String]$Baseline = $env:INPUT_BASELINE,
+    [String]$Baseline,
 
     # The conventions to use
     [Parameter(Mandatory = $False)]
-    [String]$Conventions = $Env:INPUT_CONVENTIONS,
+    [String]$Conventions,
 
     # The path to an options file.
     [Parameter(Mandatory = $False)]
-    [String]$Option = $Env:INPUT_OPTION,
+    [String]$Option,
 
     # Filters output to include results with the specified outcome.
     [Parameter(Mandatory = $False)]
-    [String]$Outcome = $Env:INPUT_OUTCOME,
+    [String]$Outcome,
 
     # The output format
     [Parameter(Mandatory = $False)]
     [ValidateSet('None', 'Yaml', 'Json', 'NUnit3', 'Csv', 'Markdown', 'Sarif')]
-    [String]$OutputFormat = $Env:INPUT_OUTPUTFORMAT,
+    [String]$OutputFormat,
 
     # The path to store formatted output
     [Parameter(Mandatory = $False)]
-    [String]$OutputPath = $Env:INPUT_OUTPUTPATH,
+    [String]$OutputPath,
 
     # Determine if a pre-release module version is installed.
     [Parameter(Mandatory = $False)]
-    [String]$PreRelease = $Env:INPUT_PRERELEASE,
+    [String]$PreRelease,
 
     # The name of the PowerShell repository where PSRule modules are installed from.
-    [String]$Repository = $Env:INPUT_REPOSITORY,
+    [String]$Repository,
 
     # Determines if a job summary is written.
     [Parameter(Mandatory = $False)]
-    [String]$Summary = $Env:INPUT_SUMMARY,
+    [ValidateSet('true', 'false')]
+    [String]$Summary,
 
     # The specific version of PSRule to use.
     [Parameter(Mandatory = $False)]
-    [String]$Version = $Env:INPUT_VERSION
+    [String]$Version,
+
+    [Parameter(Mandatory = $False)]
+    [ValidateSet('true', 'false')]
+    [String]$Restore
 )
 
-$workspacePath = $Env:GITHUB_WORKSPACE;
+# Set debugging verbosity and helpers.
 $ProgressPreference = [System.Management.Automation.ActionPreference]::SilentlyContinue;
 if ($Env:SYSTEM_DEBUG -eq 'true') {
     $VerbosePreference = [System.Management.Automation.ActionPreference]::Continue;
 }
 
-# Check inputType
-if ([String]::IsNullOrEmpty($InputType) -or $InputType -notin 'repository', 'inputPath') {
-    $InputType = 'repository';
+function WriteDebug {
+    [CmdletBinding()]
+    param (
+        [Parameter(Position = 0, Mandatory = $True)]
+        [String]$Message
+    )
+    process {
+        if ($Env:SYSTEM_DEBUG -eq 'true' -or $Env:ACTIONS_STEP_DEBUG -eq 'true') {
+            Write-Host "[debug] $Message";
+        }
+    }
 }
 
-# Set workspace
+function WriteInfo {
+    [CmdletBinding()]
+    param (
+        [Parameter(Position = 0, Mandatory = $True)]
+        [String]$Message
+    )
+    process {
+        Write-Host "[info] $Message";
+    }
+}
+
+# Check .NET version.
+dotnet --version
+
+# Setup the workspace path.
 if ([String]::IsNullOrEmpty($workspacePath)) {
     $workspacePath = $PWD;
 }
+
+WriteInfo "Using workspace path: $WorkspacePath";
+
 
 # Set Path
 if ([String]::IsNullOrEmpty($Path)) {
@@ -104,11 +128,11 @@ else {
 }
 
 # Set Source
-if ([String]::IsNullOrEmpty($Source)) {
-    $Source = Join-Path -Path $Path -ChildPath '.ps-rule/';
+if ([String]::IsNullOrWhiteSpace($Source)) {
+    $Source = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($Path, '.ps-rule/'))
 }
-else {
-    $Source = Join-Path -Path $Path -ChildPath $Source;
+elseif (![System.IO.Path]::IsPathFullyQualified($Source)) {
+    $Source = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($Path, $Source))
 }
 
 # Set conventions
@@ -126,18 +150,7 @@ if ([String]::IsNullOrEmpty($Repository)) {
     $Repository = 'PSGallery'
 }
 
-function WriteDebug {
-    [CmdletBinding()]
-    param (
-        [Parameter(Position = 0, Mandatory = $True)]
-        [String]$Message
-    )
-    process {
-        if ($Env:SYSTEM_DEBUG -eq 'true' -or $Env:ACTIONS_STEP_DEBUG -eq 'true') {
-            Write-Host "::debug::$Message";
-        }
-    }
-}
+
 
 #
 # Check and install modules
@@ -227,7 +240,6 @@ Write-Host "[info] Using Path: $Path";
 Write-Host "[info] Using Source: $Source";
 Write-Host "[info] Using Baseline: $Baseline";
 Write-Host "[info] Using Conventions: $Conventions";
-Write-Host "[info] Using InputType: $InputType";
 Write-Host "[info] Using InputPath: $InputPath";
 Write-Host "[info] Using Option: $Option";
 Write-Host "[info] Using Outcome: $Outcome";
@@ -275,20 +287,12 @@ try {
         $invokeParams['As'] = 'Detail';
     }
 
-    # repository
-    if ($InputType -eq 'repository') {
-        WriteDebug 'Running ''Assert-PSRule'' with repository as input.';
-        Write-Host '';
-        Write-Host '---';
-        Assert-PSRule @invokeParams -InputPath $InputPath -Format File;
-    }
-    # inputPath
-    elseif ($InputType -eq 'inputPath') {
-        WriteDebug 'Running ''Assert-PSRule'' with input from path.';
-        Write-Host '';
-        Write-Host '---';
-        Assert-PSRule @invokeParams -InputPath $InputPath;
-    }
+    Write-Host '';
+    Write-Host '---';
+
+    dotnet tool run ps-rule run --input-path $InputPath
+
+    Assert-PSRule @invokeParams -InputPath $InputPath;
 }
 catch [PSRule.Pipeline.RuleException] {
     Write-Host "::error::Rule exception: $($_.Exception.Message)";
