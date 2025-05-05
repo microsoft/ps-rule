@@ -2,30 +2,30 @@
 # GitHub Action manifest for PSRule
 #
 name: 'PSRule'
-description: 'Run rules in a GitHub repository.'
+description: 'Run a scan of files in a GitHub repository.'
 author: 'Microsoft'
 branding:
   icon: 'check-circle'
   color: 'green'
 inputs:
-  inputType:
-    description: 'Determines the type of input to use for PSRule.'
-    default: 'repository'
+  includePath:
+    description: 'An path containing rules to use for analysis.'
+    default: '.ps-rule/'
     required: false
 
   inputPath:
     description: 'The path PSRule will look for files to validate.'
+    default: '.'
+    required: false
+
+  formats:
+    description: 'A comma separated list of input formats to enable for scanning.'
     default: ''
     required: false
 
   modules:
     description: 'A comma separated list of modules to use for analysis.'
     default: ''
-    required: false
-
-  source:
-    description: 'An path containing rules to use for analysis.'
-    default: '.ps-rule/'
     required: false
 
   baseline:
@@ -45,7 +45,7 @@ inputs:
 
   outcome:
     description: 'Filters output to include results with the specified outcome.'
-    default: ''
+    default: 'Processed'
     required: false
 
   outputFormat:
@@ -83,11 +83,43 @@ inputs:
     default: ''
     required: false
 
+  restore:
+    description: 'Restore PSRule modules.'
+    default: 'true'
+    required: false
+
 runs:
   using: 'composite'
   steps:
-    - name: 'Analysis'
-      shell: pwsh
-      working-directory: ${{ github.workspace }}
+    - name: Initialize PSRule
+      shell: sh
       run: |-
-        ${{ github.action_path }}/powershell.ps1 -InputType '${{ inputs.inputType }}' -InputPath '${{ inputs.inputPath }}' -Modules '${{ inputs.modules }}' -Source '${{ inputs.source }}' -Baseline '${{ inputs.baseline }}' -Conventions '${{ inputs.conventions }}' -Option '${{ inputs.option }}' -Outcome '${{ inputs.outcome }}' -OutputFormat '${{ inputs.outputFormat }}' -OutputPath '${{ inputs.outputPath }}' -Path '${{ inputs.path }}' -PreRelease '${{ inputs.prerelease }}' -Repository '${{ inputs.repository }}' -Summary '${{ inputs.summary }}' -Version '${{ inputs.version }}'
+        dotnet --version
+
+        if [ ! -z "$PSRULE_TOOL_PACKAGE_SOURCE" ]; then
+          echo "Installing PSRule from local package source..."
+          echo "[info] Using Package Source: $PSRULE_TOOL_PACKAGE_SOURCE"
+          dotnet tool install --add-source $PSRULE_TOOL_PACKAGE_SOURCE microsoft.psrule.tool --version $PSRULE_TOOL_PACKAGE_VERSION
+        else
+          echo "Installing PSRule..."
+          dotnet tool restore --tool-manifest ${{ github.action_path }}/.config/dotnet-tools.json
+        fi
+        echo "PSRule version is: $(dotnet tool run ps-rule --version)"
+
+    - name: Run PSRule
+      shell: sh
+      working-directory: ${{ github.workspace }}
+      env:
+        PSRULE_OUTPUT_STYLE: GitHubActions
+        INPUT_INCLUDEPATH: ${{ inputs.includePath }}
+        INPUT_INPUTPATH: ${{ inputs.inputPath }}
+        INPUT_FORMATS: ${{ inputs.formats }}
+        INPUT_MODULES: ${{ inputs.modules }}
+        INPUT_BASELINE: ${{ inputs.baseline }}
+        INPUT_CONVENTIONS: ${{ inputs.conventions }}
+        INPUT_OPTION: ${{ inputs.option }}
+        INPUT_OUTCOME: ${{ inputs.outcome }}
+        INPUT_OUTPUTFORMAT: ${{ inputs.outputFormat }}
+        INPUT_OUTPUTPATH: ${{ inputs.outputPath }}
+        INPUT_SUMMARY: ${{ inputs.summary }}
+      run: dotnet tool run ps-rule run --in-github-actions

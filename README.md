@@ -81,10 +81,9 @@ For a list of changes please see the [change log][2].
 - name: Run PSRule analysis
   uses: microsoft/ps-rule@main
   with:
-    inputType: repository, inputPath                             # Optional. Determines the type of input to use for PSRule.
     inputPath: string                                            # Optional. The path PSRule will look for files to validate.
     modules: string                                              # Optional. A comma separated list of modules to use for analysis.
-    source: string                                               # Optional. A path containing rules to use for analysis.
+    includePath: string                                               # Optional. A path containing rules to use for analysis.
     baseline: string                                             # Optional. The name of a PSRule baseline to use.
     conventions: string                                          # Optional. A comma separated list of conventions to use.
     option: string                                               # Optional. The path to an options file.
@@ -96,17 +95,8 @@ For a list of changes please see the [change log][2].
     repository: string                                           # Optional. The name of the PowerShell repository where PSRule modules are installed from.
     summary: boolean                                             # Optional. Determines if a job summary is written.
     version: string                                              # Optional. The specific version of PSRule to use.
+    restore: boolean
 ```
-
-### `inputType`
-
-Determines the type of input to use for PSRule either `repository` or `inputPath`.
-Defaults to `repository`.
-
-When set to:
-
-- `repository` - The structure of the repository within `inputPath` will be analyzed.
-- `inputPath` - Supported file formats within `inputPath` will be read as objects.
 
 ### `inputPath`
 
