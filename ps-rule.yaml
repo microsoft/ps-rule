@@ -6,14 +6,16 @@
 # https://microsoft.github.io/PSRule/
 
 requires:
-  PSRule: "@pre >=1.11.0"
+  PSRule: "@pre >=2.9.0"
 
 output:
   culture:
     - en-US
 
 input:
+  fileObjects: true
   pathIgnore:
     - "*.md"
     - "*.json"
     - ".vscode/"
+    - "dotnet-install.sh"

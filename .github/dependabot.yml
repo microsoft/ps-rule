@@ -7,13 +7,32 @@
 
 version: 2
 updates:
+  # Maintain dependencies for NuGet
+  - package-ecosystem: nuget
+    directory: '/'
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
 
   # Maintain dependencies for GitHub Actions
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: github-actions
+    directory: '/'
     schedule:
-      interval: "daily"
+      interval: daily
     labels:
-    - "dependencies"
-    reviewers:
-    - "@microsoft/psrule"
+      - dependencies
+    groups:
+      github:
+        patterns:
+          - actions/*
+          - github/*
+
+  # Maintain dependencies for .NET SDK
+  - package-ecosystem: dotnet-sdk
+    directory: /
+    schedule:
+      interval: weekly
+      day: wednesday
+    labels:
+      - dependencies
