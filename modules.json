@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "PSRule": {
-      "version": "2.9.0"
-    }
-  },
-  "devDependencies": {}
-}
