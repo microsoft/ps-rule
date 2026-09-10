@@ -24,23 +24,36 @@ To get the latest stable release by major version use:
   uses: microsoft/ps-rule@v2
 ```
 
-To get a specific release use **(recommended)**:
+To get a specific release use:
 
 ```yaml
 - name: Run PSRule analysis
   uses: microsoft/ps-rule@v2.9.0
 ```
 
+To pin to a specific commit use **(recommended)**:
+
+```yaml
+- name: Run PSRule analysis
+  uses: microsoft/ps-rule@46451b8f5258c41beb5ae69ed7190ccbba84112c # v2.9.0
+```
+
 ---
 
 > [!TIP]
-> The recommended approach is to pin to the latest specific release for example `microsoft/ps-rule@v2.9.0`.
-> Pinning to a specific release reduces the risk of new releases breaking your pipeline.
+> The recommended approach is to pin a specific commit.
+> Using a specific commit provides the most secure approach to address supply chain security risks.
+> Pinning to a specific release or commit reduces the risk of new releases breaking your pipeline.
+>
+> If you are not using dependabot to automatically update version commits, pinning to a specific release is also a good option.
 >
 > You can easily update to the latest release by changing the version number or using version updates with Dependabot.
+> Dependabot supports automatically bumping specific release commits and release tags.
 > To configure version updates of `github-actions` with Dependabot see [Configuring version updates][5].
 >
 > When the next release is available, bumping the version allows you to test in a feature branch before merging to main.
+>
+> See the available releases [here](https://github.com/marketplace/actions/psrule).
 
 ---
 
@@ -81,10 +94,9 @@ For a list of changes please see the [change log][2].
 - name: Run PSRule analysis
   uses: microsoft/ps-rule@main
   with:
-    inputType: repository, inputPath                             # Optional. Determines the type of input to use for PSRule.
+    includePath: string                                          # Optional. A path containing custom rules to use for analysis.
     inputPath: string                                            # Optional. The path PSRule will look for files to validate.
     modules: string                                              # Optional. A comma separated list of modules to use for analysis.
-    source: string                                               # Optional. A path containing rules to use for analysis.
     baseline: string                                             # Optional. The name of a PSRule baseline to use.
     conventions: string                                          # Optional. A comma separated list of conventions to use.
     option: string                                               # Optional. The path to an options file.
@@ -92,21 +104,19 @@ For a list of changes please see the [change log][2].
     outputFormat: None, Yaml, Json, NUnit3, Csv, Markdown, Sarif # Optional. The format to use when writing results to disk.
     outputPath: string                                           # Optional. The file path to write results to.
     path: string                                                 # Optional. The working directory PSRule is run from.
-    prerelease: boolean                                          # Optional. Determine if a pre-release module version is installed.
-    repository: string                                           # Optional. The name of the PowerShell repository where PSRule modules are installed from.
+    prerelease: boolean                                          # Not available. Determine if a pre-release module version is installed.
+    repository: string                                           # Not available. The name of the PowerShell repository where PSRule modules are installed from.
     summary: boolean                                             # Optional. Determines if a job summary is written.
     version: string                                              # Optional. The specific version of PSRule to use.
+    restore: boolean                                             # Optional. Determines if PSRule modules are restored before analysis.
 ```
 
-### `inputType`
+### `includePath`
 
-Determines the type of input to use for PSRule either `repository` or `inputPath`.
-Defaults to `repository`.
+An path containing custom rules to use for analysis.
+Defaults to `.ps-rule/`.
 
-When set to:
-
-- `repository` - The structure of the repository within `inputPath` will be analyzed.
-- `inputPath` - Supported file formats within `inputPath` will be read as objects.
+Use this option to include rules that have not been packaged as a module.
 
 ### `inputPath`
 
@@ -129,13 +139,6 @@ PSRule will install the latest **stable** version from the PowerShell Gallery au
 To install pre-release module versions, use `prerelease: true`.
 
   [3]: https://www.powershellgallery.com/packages?q=Tags%3A%22PSRule-rules%22
-
-### `source`
-
-An path containing rules to use for analysis.
-Defaults to `.ps-rule/`.
-
-Use this option to include rules that have not been packaged as a module.
 
 ### `baseline`
 
@@ -186,12 +189,16 @@ Options specified in `ps-rule.yaml` from this directory will be used unless over
 
 ### `prerelease`
 
+_Currently this option is not supported in v3 pre-release._
+
 Determine if a pre-release module versions are installed.
 When set to `true` the latest pre-release or stable module version is installed.
 
 If this input is not configured, invalid, or set to `false` only stable module versions will be installed.
 
 ### `repository`
+
+_Currently this option is not supported in v3 pre-release._
 
 The name of the PowerShell repository where PSRule modules are installed from.
 By default this is the PowerShell Gallery.
@@ -224,6 +231,14 @@ When set:
 - The specific version of PSRule will be installed and imported for use.
 - If a pre-release version is specified, `prerelease: true` must also be specified.
 - If the version is not found, an error will be thrown.
+
+### `restore`
+
+Determines if PSRule modules are restored before analysis.
+Defaults to `true`.
+
+To skip restoring modules, set `restore: false`.
+When set to `false`, the action will not attempt to restore PSRule modules before analysis.
 
 ## Using the action
 
