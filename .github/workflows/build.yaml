@@ -97,7 +97,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Run PSRule analysis
-        uses: microsoft/ps-rule@9668b47aaefaf56812a3a879ee103161899bd650 # main
+        uses: microsoft/ps-rule@997b16bde74f01ec8d1d2e658847c399d3beb75b # main
         with:
           modules: PSRule.Rules.MSFT.OSS
           prerelease: true
