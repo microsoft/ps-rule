@@ -17,3 +17,5 @@ updates:
     - "dependencies"
     reviewers:
     - "@microsoft/psrule"
+    cooldown:
+      default-days: 7
